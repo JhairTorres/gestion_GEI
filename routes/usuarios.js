@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
     );
 });
 
-// Login de usuario
+//Login de usuario
 router.post('/login', (req, res) => {
     const { correo, clave } = req.body;
     db.query('SELECT * FROM usuarios WHERE correo = ?', [correo], async (err, results) => {
@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
         if (!validPass) return res.status(400).json({ message: 'Contraseña incorrecta' });
 
         const token = jwt.sign({ id: user.id, rol: user.rol }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token: token, rol: user.rol });
     });
 });
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="register.js"></script>
+</head>
+<body>
+    <div id="register-container">
+        <h2>Registro</h2>
+        <form id="register-form">
+            <input type="text" id="nombre" placeholder="Nombre completo" required>
+            <input type="email" id="correo" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <select id="rol">
+                <option value="Administrador">Administrador</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Auditor">Auditor</option>
+            </select>
+            <button type="button" onclick="register()">Registrarse</button>
+        </form>
+        <p id="register-error" class="error"></p>
+        <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </div>
+</body>
+</html>

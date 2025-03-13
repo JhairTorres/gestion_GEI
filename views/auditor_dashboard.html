@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Auditor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#auditorias" onclick="loadAuditorias()">Auditorías</a></li>
+        </ul>
+        <button onclick="logout()">Cerrar Sesión</button>
+    </nav>
+    <main id="content">
+        <h2>Bienvenido, Auditor</h2>
+        <p>Solo puedes acceder a los registros de auditoría.</p>
+        <div id="data-container">
+            <!-- Datos cargados dinámicamente desde la base de datos -->
+        </div>
+    </main>
+    <script>
+        async function loadAuditorias() {
+            const response = await fetch('/api/auditorias', {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+            });
+            const data = await response.json();
+            document.getElementById('data-container').innerHTML = JSON.stringify(data, null, 2);
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('rol');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
