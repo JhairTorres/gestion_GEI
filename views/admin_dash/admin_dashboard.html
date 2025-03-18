@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script defer src="admin_dashboard.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #d3b8a1;
+            margin: 0;
+        }
+
+        .container {
+            background: #fdf5e6;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        nav ul li {
+            background: #8b6f5b;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logout {
+            background: #b52e1f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            background: #8c2316;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Panel de Administrador</h2>
+        <p>Selecciona una sección del menú para gestionar los datos.</p>
+
+        <nav>
+            <ul>
+                <li><a href="#usuarios" onclick="loadSection('auth')">Usuarios</a></li>
+                <li><a href="#auditorias" onclick="loadSection('auditoria')">Auditorías</a></li>
+                <li><a href="#emisiones" onclick="loadSection('emisiones')">Emisiones</a></li>
+                <li><a href="#fuentes" onclick="loadSection('fuentes')">Fuentes</a></li>
+                <li><a href="#tiposGas" onclick="loadSection('gei')">Tipos de Gas</a></li>
+                <li><a href="#ubicaciones" onclick="loadSection('ubicaciones')">Ubicaciones</a></li>
+            </ul>
+        </nav>
+
+        <button class="logout" onclick="logout()">Cerrar Sesión</button>
+    </div>
+</body>
+</html>
+

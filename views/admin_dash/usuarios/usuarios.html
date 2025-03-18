@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <script defer src="usuarios.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4e7d1; /* Fondo color crema */
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            background-color: #a67c52; /* Marrón claro */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        nav button:hover {
+            background-color: #8b5e3b; /* Marrón más oscuro */
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #5a3e1b; /* Marrón oscuro */
+        }
+
+        button {
+            background-color: #c19a6b; /* Color tierra */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #a57c56; /* Tonalidad más oscura */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #8b5e3b; /* Marrón más oscuro */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2e6d4; /* Beige claro */
+        }
+
+        tr:hover {
+            background-color: #e0c9a6; /* Beige más oscuro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button onclick="window.location.href='../admin_dashboard.html'">Volver al Panel</button>
+            <button onclick="logout()">Cerrar Sesión</button>
+        </nav>
+
+        <h2>Gestión de Usuarios</h2>
+        
+        <button onclick="showAddForm()">Agregar Usuario</button>
+        
+        <div id="form-container"></div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="usuarios-table">
+                <!-- Los datos se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

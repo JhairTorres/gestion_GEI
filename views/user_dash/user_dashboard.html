@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Auditor</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Panel de Usuario</title>
+    <link rel="stylesheet" href="../styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#auditorias" onclick="loadAuditorias()">Auditorías</a></li>
+            <li><a href="#usuarios" onclick="loadSection('usuarios')">Usuarios</a></li>
+            <li><a href="#auditorias" onclick="loadSection('auditorias')">Auditorías</a></li>
+            <li><a href="#emisiones" onclick="loadSection('emisiones')">Emisiones</a></li>
+            <li><a href="#fuentes" onclick="loadSection('fuentes')">Fuentes Emisoras</a></li>
+            <li><a href="#tiposGas" onclick="loadSection('tiposGas')">Tipos de Gas</a></li>
+            <li><a href="#ubicaciones" onclick="loadSection('ubicaciones')">Ubicaciones</a></li>
         </ul>
         <button onclick="logout()">Cerrar Sesión</button>
     </nav>
     <main id="content">
-        <h2>Bienvenido, Auditor</h2>
-        <p>Solo puedes acceder a los registros de auditoría.</p>
+        <h2>Bienvenido, Usuario</h2>
+        <p>Solo puedes visualizar los datos.</p>
         <div id="data-container">
             <!-- Datos cargados dinámicamente desde la base de datos -->
         </div>
     </main>
     <script>
-        async function loadAuditorias() {
-            const response = await fetch('/api/auditorias', {
+        async function loadSection(section) {
+            const response = await fetch(`/api/${section}`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
@@ -34,7 +39,7 @@
         function logout() {
             localStorage.removeItem('token');
             localStorage.removeItem('rol');
-            window.location.href = 'index.html';
+            window.location.href = '../login/login.html';
         }
     </script>
 </body>

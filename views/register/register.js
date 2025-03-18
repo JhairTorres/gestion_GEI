@@ -27,7 +27,7 @@ async function register() {
         }
         
         alert('Registro exitoso. Redirigiendo al inicio de sesión.');
-        window.location.href = 'login.html';
+        window.location.href = '../login/login.html';
     } catch (error) {
         errorMsg.textContent = 'Error al conectar con el servidor.';
         console.error('Error:', error);

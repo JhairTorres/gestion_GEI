@@ -28,13 +28,13 @@ async function login() {
         
         switch (data.rol) {
             case 'Administrador':
-                window.location.href = 'admin_dashboard.html';
+                window.location.href = '../admin_dash/admin_dashboard.html';
                 break;
             case 'Usuario':
-                window.location.href = 'user_dashboard.html';
+                window.location.href = '../user_dash/user_dashboard.html';
                 break;
             case 'Auditor':
-                window.location.href = 'auditor_dashboard.html';
+                window.location.href = '../auditor_dash/auditor_dashboard.html';
                 break;
             default:
                 errorMsg.textContent = 'Rol no reconocido'+ data.rol;
