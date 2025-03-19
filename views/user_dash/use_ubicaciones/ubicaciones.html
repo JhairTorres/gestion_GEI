@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ubicaciones</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <script src="ubicaciones.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4e7d1;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        nav button, button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        nav button:hover, button:hover {
+            background-color: #8b5e3b;
+        }
+
+        h2 {
+            color: #5a3e1b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #8b5e3b;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2e6d4;
+        }
+
+        tr:hover {
+            background-color: #e0c9a6;
+        }
+
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            width: 100%;
+            background-color: #f8f1e5;
+        }
+
+        input {
+            padding: 8px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button onclick="window.location.href='../user_dashboard.html'">Volver al Panel</button>
+            <button onclick="logout()">Cerrar Sesión</button>
+        </nav>
+
+        <h2>Gestión de Ubicaciones</h2>
+
+        <!-- 🔹 Buscar Ubicación por ID -->
+        <div class="section">
+            <h3>Buscar Ubicación</h3>
+            <input type="number" id="searchId" placeholder="ID Ubicación">
+            <button onclick="searchUbicacion()">Buscar</button>
+        </div>
+
+        <!-- 🔹 Agregar Nueva Ubicación -->
+        <div class="section">
+            <h3>Agregar Nueva Ubicación</h3>
+            <input type="text" id="pais" placeholder="País">
+            <input type="text" id="region" placeholder="Región">
+            <input type="text" id="ciudad" placeholder="Ciudad">
+            <button onclick="saveUbicacion()">Agregar</button>
+        </div>
+
+        <!-- 🔹 Actualizar Ubicación por ID -->
+        <div class="section">
+            <h3>Actualizar Ubicación</h3>
+            <input type="number" id="updateId" placeholder="ID Ubicación">
+            <input type="text" id="newPais" placeholder="Nuevo País">
+            <input type="text" id="newRegion" placeholder="Nueva Región">
+            <input type="text" id="newCiudad" placeholder="Nueva Ciudad">
+            <button onclick="editUbicacion()">Actualizar</button>
+        </div>
+
+        <!-- 🔹 Tabla de Ubicaciones -->
+        <h3>Registros de Ubicaciones</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>País</th>
+                    <th>Región</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody id="ubicaciones-table"></tbody>
+        </table>
+    </div>
+</body>
+</html>
