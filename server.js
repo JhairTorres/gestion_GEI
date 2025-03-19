@@ -8,14 +8,19 @@ const db = require('./config/db'); // Importamos la conexión a la base de datos
 // Inicializar la aplicación
 const app = express();
 
-// Configurar middleware
+// Middleware para analizar cookies HTTP-only
 app.use(cookieParser());
-app.use(express.json());
 
-// Configuración avanzada de CORS para manejar sesiones con cookies HTTP-only
+// Middleware para analizar JSON y datos de formularios
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
+
+// Configuración avanzada de CORS para permitir cookies en las solicitudes
 app.use(cors({
     origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
-    credentials: true
+    credentials: true, // Permitir cookies en la solicitud
+    allowedHeaders: ['Content-Type', 'Authorization'], // Permitir estos encabezados en las solicitudes
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
 }));
 
 // Servir archivos estáticos desde la carpeta 'views'
@@ -27,7 +32,8 @@ app.get('/', (req, res) => {
 });
 
 // Importar rutas
-const authRoutes = require('./routes/usuarios');
+const authRoutes = require('./routes/autorizacion');
+const userRoutes = require('./routes/usuarios');
 const geiRoutes = require('./routes/gei');
 const fuentesRoutes = require('./routes/fuentes');
 const ubicacionesRoutes = require('./routes/ubicaciones');
@@ -41,6 +47,7 @@ app.use('/api/fuentes', fuentesRoutes);
 app.use('/api/ubicaciones', ubicacionesRoutes);
 app.use('/api/emisiones', emisionesRoutes);
 app.use('/api/auditoria', auditoriaRoutes);
+app.use('/api/usuarios', userRoutes);
 
 // Middleware de manejo de errores global
 app.use((err, req, res, next) => {

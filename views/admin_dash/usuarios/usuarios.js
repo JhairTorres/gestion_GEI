@@ -2,12 +2,12 @@ async function checkSession() {
     try {
         const response = await fetch('http://localhost:5000/api/auth/session', {
             method: 'GET',
-            credentials: 'include' // Permite enviar cookies en la petición
+            credentials: 'include'
         });
 
         if (response.ok) {
             const data = await response.json();
-            return data.authenticated; // true si el usuario está autenticado, false si no
+            return data.authenticated;
         } else {
             return false;
         }
@@ -29,11 +29,12 @@ async function checkToken() {
     return true;
 }
 
+// Obtener todos los usuarios
 async function fetchUsuarios() {
     if (!(await checkToken())) return;
 
     try {
-        const response = await fetch('http://localhost:5000/api/auth/', {
+        const response = await fetch('http://localhost:5000/api/usuarios/', {
             method: 'GET',
             credentials: 'include'
         });
@@ -47,6 +48,126 @@ async function fetchUsuarios() {
     }
 }
 
+// Buscar usuario por ID
+async function searchUsuario() {
+    if (!(await checkToken())) return;
+
+    const id = document.getElementById("searchId").value;
+    if (!id) {
+        alert("Ingrese un ID válido");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/usuarios/${id}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error(`Usuario con ID ${id} no encontrado`);
+
+        const usuario = await response.json();
+        alert(`Usuario encontrado: \nNombre: ${usuario.nombre}\nCorreo: ${usuario.correo}\nRol: ${usuario.rol}`);
+    } catch (error) {
+        console.error("Error al buscar usuario:", error);
+        alert("Error al buscar usuario. Verifique el ID.");
+    }
+}
+
+// Agregar un nuevo usuario
+async function saveUsuario() {
+    if (!(await checkToken())) return;
+
+    const nombre = document.getElementById("nombre").value;
+    const correo = document.getElementById("correo").value;
+    const clave = document.getElementById("clave").value;
+    const rol = document.getElementById("rol").value;
+
+    if (!nombre || !correo || !clave) {
+        alert("Todos los campos son obligatorios");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:5000/api/usuarios/', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, correo, clave, rol })
+        });
+
+        if (!response.ok) throw new Error('Error al agregar usuario');
+
+        alert("Usuario agregado con éxito");
+        fetchUsuarios();
+    } catch (error) {
+        console.error("Error al agregar usuario:", error);
+        alert("No se pudo agregar el usuario");
+    }
+}
+
+// Editar usuario por ID
+async function editUsuario() {
+    if (!(await checkToken())) return;
+
+    const id = document.getElementById("updateId").value;
+    const nombre = document.getElementById("newNombre").value;
+    const correo = document.getElementById("newCorreo").value;
+    const clave = document.getElementById("newClave").value;
+    const rol = document.getElementById("newRol").value;
+
+    if (!id) {
+        alert("Ingrese un ID válido");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/usuarios/${id}`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, correo, clave, rol })
+        });
+
+        if (!response.ok) throw new Error('Error al actualizar usuario');
+
+        alert("Usuario actualizado con éxito");
+        fetchUsuarios();
+    } catch (error) {
+        console.error("Error al actualizar usuario:", error);
+        alert("No se pudo actualizar el usuario");
+    }
+}
+
+// Eliminar usuario por ID
+async function deleteUsuario() {
+    if (!(await checkToken())) return;
+
+    const id = document.getElementById("deleteId").value;
+    if (!id) {
+        alert("Ingrese un ID válido");
+        return;
+    }
+
+    if (!confirm("¿Seguro que deseas eliminar este usuario?")) return;
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/usuarios/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Error al eliminar usuario');
+
+        alert("Usuario eliminado con éxito");
+        fetchUsuarios();
+    } catch (error) {
+        console.error("Error al eliminar usuario:", error);
+        alert("No se pudo eliminar el usuario");
+    }
+}
+
+// Renderizar tabla de usuarios
 function renderUsuarios(usuarios) {
     const tabla = document.getElementById("usuarios-table");
     tabla.innerHTML = ""; // Limpiar contenido previo
@@ -58,75 +179,12 @@ function renderUsuarios(usuarios) {
             <td>${usuario.nombre}</td>
             <td>${usuario.correo}</td>
             <td>${usuario.rol}</td>
-            <td>
-                <button onclick="editarUsuario(${usuario.id})">Editar</button>
-                <button onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
-            </td>
         `;
         tabla.appendChild(row);
     });
 }
 
-async function agregarUsuario(datos) {
-    if (!(await checkToken())) return;
-
-    try {
-        const response = await fetch('http://localhost:5000/api/auth/', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datos)
-        });
-
-        if (!response.ok) throw new Error('Error al agregar usuario');
-        
-        fetchUsuarios(); // Recargar lista de usuarios
-    } catch (error) {
-        console.error("Error al agregar usuario:", error);
-    }
-}
-
-async function editarUsuario(id) {
-    if (!(await checkToken())) return;
-
-    const nuevoRol = prompt("Ingrese el nuevo rol:");
-    if (!nuevoRol) return;
-
-    try {
-        const response = await fetch(`http://localhost:5000/api/auth/${id}`, {
-            method: 'PUT',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ rol: nuevoRol })
-        });
-
-        if (!response.ok) throw new Error('Error al actualizar usuario');
-
-        fetchUsuarios(); // Recargar lista
-    } catch (error) {
-        console.error("Error al actualizar usuario:", error);
-    }
-}
-
-async function eliminarUsuario(id) {
-    if (!(await checkToken())) return;
-
-    if (!confirm("¿Seguro que deseas eliminar este usuario?")) return;
-
-    try {
-        const response = await fetch(`http://localhost:5000/api/auth/${id}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        });
-
-        if (!response.ok) throw new Error('Error al eliminar usuario');
-
-        fetchUsuarios(); // Recargar lista
-    } catch (error) {
-        console.error("Error al eliminar usuario:", error);
-    }
-}
-
+// Cerrar sesión
 async function logout() {
     try {
         await fetch('http://localhost:5000/api/auth/logout', {
@@ -142,4 +200,3 @@ async function logout() {
 
 // Cargar usuarios al iniciar
 fetchUsuarios();
-
