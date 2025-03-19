@@ -5,40 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Usuario</title>
     <link rel="stylesheet" href="../styles.css">
-    <script defer src="script.js"></script>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="#emisiones" onclick="loadSection('emisiones')">Emisiones</a></li>
-            <li><a href="#fuentes" onclick="loadSection('fuentes')">Fuentes Emisoras</a></li>
-            <li><a href="#tiposGas" onclick="loadSection('tiposGas')">Tipos de Gas</a></li>
-            <li><a href="#ubicaciones" onclick="loadSection('ubicaciones')">Ubicaciones</a></li>
-        </ul>
-        <button onclick="logout()">Cerrar Sesión</button>
-    </nav>
-    <main id="content">
-        <h2>Bienvenido, Usuario</h2>
-        <p>Solo puedes visualizar los datos.</p>
-        <div id="data-container">
-            <!-- Datos cargados dinámicamente desde la base de datos -->
-        </div>
-    </main>
-    <script>
-        async function loadSection(section) {
-            const response = await fetch(`/api/${section}`, {
-                method: 'GET',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-            });
-            const data = await response.json();
-            document.getElementById('data-container').innerHTML = JSON.stringify(data, null, 2);
+    <script defer src="user_dashboard.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #d3b8a1;
+            margin: 0;
         }
 
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('rol');
-            window.location.href = '../login/login.html';
+        .container {
+            background: #fdf5e6;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
         }
-    </script>
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        nav ul li {
+            background: #8b6f5b;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logout {
+            background: #b52e1f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            background: #8c2316;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Bienvenido, Usuario</h2>
+        <p>Solo puedes visualizar los datos.</p>
+
+        <nav>
+            <ul>
+                <li><a href="#emisiones" onclick="loadSection('emisiones')">Emisiones</a></li>
+                <li><a href="#fuentes" onclick="loadSection('fuentes')">Fuentes</a></li>
+                <li><a href="#tiposGas" onclick="loadSection('gei')">Tipos de Gas</a></li>
+                <li><a href="#ubicaciones" onclick="loadSection('ubicaciones')">Ubicaciones</a></li>
+            </ul>
+        </nav>
+
+        <button class="logout" onclick="logout()">Cerrar Sesión</button>
+    </div>
 </body>
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Auditorías</title>
+    <title>Gestión de Tipos de Gas</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="auditorias.js"></script>
+    <script src="tipos_gas.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,7 +33,7 @@
             margin-bottom: 20px;
         }
 
-        nav button {
+        nav button, button {
             background-color: #a67c52;
             color: white;
             border: none;
@@ -43,26 +43,12 @@
             font-weight: bold;
         }
 
-        nav button:hover {
+        nav button:hover, button:hover {
             background-color: #8b5e3b;
         }
 
         h2 {
             color: #5a3e1b;
-        }
-
-        button {
-            background-color: #c19a6b;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #a57c56;
         }
 
         table {
@@ -90,21 +76,6 @@
             background-color: #e0c9a6;
         }
 
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        input {
-            padding: 8px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
         .section {
             border: 1px solid #ccc;
             padding: 15px;
@@ -113,55 +84,59 @@
             width: 100%;
             background-color: #f8f1e5;
         }
+
+        input {
+            padding: 8px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
-            <button onclick="window.location.href='../auditor_dashboard.html'">Volver al Panel</button>
+            <button onclick="window.location.href='../user_dashboard.html'">Volver al Panel</button>
             <button onclick="logout()">Cerrar Sesión</button>
         </nav>
 
-        <h2>Gestión de Auditorías</h2>
+        <h2>Gestión de Tipos de Gas</h2>
 
-        <!-- 🔹 Buscar Auditoría por ID -->
+        <!-- 🔹 Buscar Tipo de Gas por ID -->
         <div class="section">
-            <h3>Buscar Auditoría por ID</h3>
-            <input type="number" id="buscarId" placeholder="Ingrese ID">
-            <button onclick="searchById()">Buscar</button>
-            <p id="resultadoBusqueda"></p>
+            <h3>Buscar Tipo de Gas</h3>
+            <input type="number" id="searchId" placeholder="ID Tipo de Gas">
+            <button onclick="searchTipoGas()">Buscar</button>
         </div>
 
-        <!-- 🔹 Agregar Nueva Auditoría -->
+        <!-- 🔹 Agregar Nuevo Tipo de Gas -->
         <div class="section">
-            <h3>Agregar Nueva Auditoría</h3>
-            <input type="number" id="usuarioId" placeholder="ID del Usuario">
-            <input type="text" id="accion" placeholder="Acción">
-            <input type="datetime-local" id="fecha" placeholder="Fecha">
-            <button onclick="saveAuditoria()">Agregar</button>
+            <h3>Agregar Nuevo Tipo de Gas</h3>
+            <input type="text" id="nombre" placeholder="Nombre del Gas">
+            <input type="number" step="0.01" id="potencial_calentamiento_global" placeholder="Potencial de Calentamiento Global">
+            <button onclick="saveTipoGas()">Agregar</button>
         </div>
 
-        <!-- 🔹 Actualizar Auditoría por ID -->
+        <!-- 🔹 Actualizar Tipo de Gas por ID -->
         <div class="section">
-            <h3>Actualizar Auditoría</h3>
-            <input type="number" id="updateId" placeholder="ID Auditoría">
-            <input type="text" id="nuevaAccion" placeholder="Nueva Acción">
-            <input type="datetime-local" id="fecha" placeholder="Fecha">
-            <button onclick="editAuditoria()">Actualizar</button>
+            <h3>Actualizar Tipo de Gas</h3>
+            <input type="number" id="updateId" placeholder="ID Tipo de Gas">
+            <input type="text" id="newNombre" placeholder="Nuevo Nombre del Gas">
+            <input type="number" step="0.01" id="newPotencial" placeholder="Nuevo Potencial de Calentamiento Global">
+            <button onclick="editTipoGas()">Actualizar</button>
         </div>
-
-        <!-- 🔹 Tabla de Auditorías -->
-        <h3>Registros de Auditoría</h3>
+        
+        <!-- 🔹 Tabla de Tipos de Gas -->
+        <h3>Registros de Tipos de Gas</h3>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Usuario ID</th>
-                    <th>Acción</th>
-                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Potencial de Calentamiento Global</th>
                 </tr>
             </thead>
-            <tbody id="auditorias-table"></tbody>
+            <tbody id="tipos-gas-table"></tbody>
         </table>
     </div>
 </body>

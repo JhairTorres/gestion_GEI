@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Auditorías</title>
+    <title>Gestión de Emisiones</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="auditorias.js"></script>
+    <script src="emisiones.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,7 +33,7 @@
             margin-bottom: 20px;
         }
 
-        nav button {
+        nav button, button {
             background-color: #a67c52;
             color: white;
             border: none;
@@ -43,26 +43,12 @@
             font-weight: bold;
         }
 
-        nav button:hover {
+        nav button:hover, button:hover {
             background-color: #8b5e3b;
         }
 
         h2 {
             color: #5a3e1b;
-        }
-
-        button {
-            background-color: #c19a6b;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #a57c56;
         }
 
         table {
@@ -90,21 +76,6 @@
             background-color: #e0c9a6;
         }
 
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        input {
-            padding: 8px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
         .section {
             border: 1px solid #ccc;
             padding: 15px;
@@ -113,55 +84,68 @@
             width: 100%;
             background-color: #f8f1e5;
         }
+
+        input {
+            padding: 8px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
-            <button onclick="window.location.href='../auditor_dashboard.html'">Volver al Panel</button>
+            <button onclick="window.location.href='../user_dashboard.html'">Volver al Panel</button>
             <button onclick="logout()">Cerrar Sesión</button>
         </nav>
 
-        <h2>Gestión de Auditorías</h2>
+        <h2>Gestión de Emisiones</h2>
 
-        <!-- 🔹 Buscar Auditoría por ID -->
+        <!-- 🔹 Buscar Emisión por ID -->
         <div class="section">
-            <h3>Buscar Auditoría por ID</h3>
-            <input type="number" id="buscarId" placeholder="Ingrese ID">
-            <button onclick="searchById()">Buscar</button>
-            <p id="resultadoBusqueda"></p>
+            <h3>Buscar Emisión</h3>
+            <input type="number" id="searchId" placeholder="ID Emisión">
+            <button onclick="searchEmision()">Buscar</button>
         </div>
 
-        <!-- 🔹 Agregar Nueva Auditoría -->
+        <!-- 🔹 Agregar Nueva Emisión -->
         <div class="section">
-            <h3>Agregar Nueva Auditoría</h3>
-            <input type="number" id="usuarioId" placeholder="ID del Usuario">
-            <input type="text" id="accion" placeholder="Acción">
-            <input type="datetime-local" id="fecha" placeholder="Fecha">
-            <button onclick="saveAuditoria()">Agregar</button>
+            <h3>Agregar Nueva Emisión</h3>
+            <input type="number" id="fuenteId" placeholder="ID de la Fuente">
+            <input type="number" id="gasId" placeholder="ID del Gas">
+            <input type="number" id="ubicacionId" placeholder="ID de Ubicación">
+            <input type="number" step="0.01" id="cantidadEmision" placeholder="Cantidad Emitida">
+            <input type="datetime-local" id="periodo" placeholder="Periodo">
+            <button onclick="saveEmision()">Agregar</button>
         </div>
 
-        <!-- 🔹 Actualizar Auditoría por ID -->
+        <!-- 🔹 Actualizar Emisión por ID -->
         <div class="section">
-            <h3>Actualizar Auditoría</h3>
-            <input type="number" id="updateId" placeholder="ID Auditoría">
-            <input type="text" id="nuevaAccion" placeholder="Nueva Acción">
-            <input type="datetime-local" id="fecha" placeholder="Fecha">
-            <button onclick="editAuditoria()">Actualizar</button>
+            <h3>Actualizar Emisión</h3>
+            <input type="number" id="updateId" placeholder="ID Emisión">
+            <input type="number" id="newFuenteId" placeholder="Nuevo ID de la Fuente">
+            <input type="number" id="newGasId" placeholder="Nuevo ID del Gas">
+            <input type="number" id="newUbicacionId" placeholder="Nuevo ID de Ubicación">
+            <input type="number" step="0.01" id="newCantidadEmision" placeholder="Nueva Cantidad Emitida">
+            <input type="datetime-local" id="newPeriodo" placeholder="Nuevo Periodo">
+            <button onclick="editEmision()">Actualizar</button>
         </div>
 
-        <!-- 🔹 Tabla de Auditorías -->
-        <h3>Registros de Auditoría</h3>
+        <!-- 🔹 Tabla de Emisiones -->
+        <h3>Registros de Emisiones</h3>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Usuario ID</th>
-                    <th>Acción</th>
-                    <th>Fecha</th>
+                    <th>Fuente ID</th>
+                    <th>Gas ID</th>
+                    <th>Ubicación ID</th>
+                    <th>Cantidad Emisión</th>
+                    <th>Periodo</th>
                 </tr>
             </thead>
-            <tbody id="auditorias-table"></tbody>
+            <tbody id="emisiones-table"></tbody>
         </table>
     </div>
 </body>
