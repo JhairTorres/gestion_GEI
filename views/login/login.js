@@ -1,4 +1,3 @@
-
 async function login() {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -13,6 +12,7 @@ async function login() {
         const response = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify({ correo: email, clave: password })
         });
         

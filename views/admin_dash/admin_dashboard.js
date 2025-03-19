@@ -1,38 +1,36 @@
-async function checkToken() {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-        console.warn("No hay token en localStorage, redirigiendo al login.");
-        window.location.href = "../login/login.html";
-        return false;
-    }
-
+async function checkSession() {
     try {
-        const response = await fetch('http://localhost:5000/api/auth/refresh-token', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${token}` }
+        const response = await fetch('http://localhost:5000/api/auth/session', {
+            method: 'GET',
+            credentials: 'include' // Permite enviar cookies en la petición
         });
 
-        const data = await response.json();
-
         if (response.ok) {
-            localStorage.setItem('token', data.newToken);
-            return true;
+            const data = await response.json();
+            return data.authenticated; // true si el usuario está autenticado, false si no
         } else {
-            console.warn("Error en la renovación del token:", data);
-            window.location.href = "../login/login.html";
             return false;
         }
     } catch (error) {
-        console.error('Error al renovar el token:', error);
-        window.location.href = "../login/login.html";
+        console.error('Error al verificar sesión:', error);
         return false;
     }
 }
 
+async function checkToken() {
+    const isAuthenticated = await checkSession();
+
+    if (!isAuthenticated) {
+        console.warn("Sesión inválida, redirigiendo al login.");
+        window.location.href = "../login/login.html";
+        return false;
+    }
+
+    return true;
+}
+
 async function loadSection(section) {
-    const valid = await checkToken();
-    if (!valid) logout();
+    if (!(await checkToken())) return;
 
     const pageMap = {
         'auth': 'usuarios/usuarios.html',
@@ -50,8 +48,17 @@ async function loadSection(section) {
     }
 }
 
-function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('rol');
+async function logout() {
+    try {
+        await fetch('http://localhost:5000/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include' // Asegura que las cookies se envíen
+        });
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+    }
+
     window.location.href = "../login/login.html";
 }
+
+
