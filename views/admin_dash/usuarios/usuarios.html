@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script defer src="usuarios.js"></script>
+    <script src="usuarios.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #f4e7d1;
             margin: 0;
         }
@@ -23,8 +23,8 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 1000px;
         }
 
         nav {
@@ -32,8 +32,8 @@
             justify-content: space-between;
             margin-bottom: 20px;
         }
-        
-        nav button {
+
+        nav button, button {
             background-color: #a67c52;
             color: white;
             border: none;
@@ -43,28 +43,12 @@
             font-weight: bold;
         }
 
-        nav button:hover {
+        nav button:hover, button:hover {
             background-color: #8b5e3b;
         }
 
         h2 {
-            margin-bottom: 15px;
             color: #5a3e1b;
-        }
-
-        button {
-            background-color: #c19a6b;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #a57c56;
         }
 
         table {
@@ -92,19 +76,16 @@
             background-color: #e0c9a6;
         }
 
-        #form-container {
-            display: none;
-            margin-top: 20px;
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            width: 100%;
+            background-color: #f8f1e5;
         }
 
-        #form-container form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #form-container input, #form-container select {
-            margin: 5px 0;
+        input {
             padding: 8px;
             width: 80%;
             border: 1px solid #ccc;
@@ -121,11 +102,52 @@
         </nav>
 
         <h2>Gestión de Usuarios</h2>
-        
-        <button onclick="showAddForm()">Agregar Usuario</button>
-        
-        <div id="form-container"></div>
-        
+
+        <!-- 🔹 Buscar Usuario por ID -->
+        <div class="section">
+            <h3>Buscar Usuario</h3>
+            <input type="number" id="searchId" placeholder="ID Usuario">
+            <button onclick="searchUsuario()">Buscar</button>
+        </div>
+
+        <!-- 🔹 Agregar Nuevo Usuario -->
+        <div class="section">
+            <h3>Agregar Nuevo Usuario</h3>
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="email" id="correo" placeholder="Correo Electrónico">
+            <input type="password" id="clave" placeholder="Clave">
+            <select id="rol">
+                <option value="Administrador">Administrador</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Auditor">Auditor</option>
+            </select>
+            <button onclick="saveUsuario()">Agregar</button>
+        </div>
+
+        <!-- 🔹 Actualizar Usuario por ID -->
+        <div class="section">
+            <h3>Actualizar Usuario</h3>
+            <input type="number" id="updateId" placeholder="ID Usuario">
+            <input type="text" id="newNombre" placeholder="Nuevo Nombre">
+            <input type="email" id="newCorreo" placeholder="Nuevo Correo">
+            <input type="password" id="newClave" placeholder="Nueva Clave">
+            <select id="newRol">
+                <option value="Administrador">Administrador</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Auditor">Auditor</option>
+            </select>
+            <button onclick="editUsuario()">Actualizar</button>
+        </div>
+
+        <!-- 🔹 Eliminar Usuario por ID -->
+        <div class="section">
+            <h3>Eliminar Usuario</h3>
+            <input type="number" id="deleteId" placeholder="ID Usuario">
+            <button onclick="deleteUsuario()">Eliminar</button>
+        </div>
+
+        <!-- 🔹 Tabla de Usuarios -->
+        <h3>Registros de Usuarios</h3>
         <table>
             <thead>
                 <tr>
@@ -133,13 +155,12 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Rol</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="usuarios-table">
-                <!-- Los datos se cargarán aquí dinámicamente -->
-            </tbody>
+            <tbody id="usuarios-table"></tbody>
         </table>
     </div>
 </body>
 </html>
+
+

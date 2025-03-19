@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Auditorías</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script defer src="auditorias.js"></script>
+    <script src="auditorias.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -128,7 +128,7 @@
         <div class="section">
             <h3>Buscar Auditoría por ID</h3>
             <input type="number" id="buscarId" placeholder="Ingrese ID">
-            <button onclick="buscarAuditoria()">Buscar</button>
+            <button onclick="searchById()">Buscar</button>
             <p id="resultadoBusqueda"></p>
         </div>
 
@@ -138,7 +138,7 @@
             <input type="number" id="usuarioId" placeholder="ID del Usuario">
             <input type="text" id="accion" placeholder="Acción">
             <input type="datetime-local" id="fecha" placeholder="Fecha">
-            <button onclick="agregarAuditoria()">Agregar</button>
+            <button onclick="saveAuditoria()">Agregar</button>
         </div>
 
         <!-- 🔹 Actualizar Auditoría por ID -->
@@ -147,14 +147,14 @@
             <input type="number" id="updateId" placeholder="ID Auditoría">
             <input type="text" id="nuevaAccion" placeholder="Nueva Acción">
             <input type="datetime-local" id="fecha" placeholder="Fecha">
-            <button onclick="actualizarAuditoria()">Actualizar</button>
+            <button onclick="editAuditoria()">Actualizar</button>
         </div>
 
         <!-- 🔹 Eliminar Auditoría por ID -->
         <div class="section">
             <h3>Eliminar Auditoría</h3>
             <input type="number" id="deleteId" placeholder="ID Auditoría">
-            <button onclick="eliminarAuditoria()">Eliminar</button>
+            <button onclick="deleteAuditoria()">Eliminar</button>
         </div>
 
         <!-- 🔹 Tabla de Auditorías -->

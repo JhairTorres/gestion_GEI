@@ -5,37 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Auditor</title>
     <link rel="stylesheet" href="../styles.css">
-    <script defer src="script.js"></script>
+    <script defer src="auditor_dashboard.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #d3b8a1;
+            margin: 0;
+        }
+
+        .container {
+            background: #fdf5e6;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        nav ul li {
+            background: #8b6f5b;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logout {
+            background: #b52e1f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            background: #8c2316;
+        }
+
+        #data-container {
+            text-align: left;
+            font-size: 12px;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#auditorias" onclick="loadAuditorias()">Auditorías</a></li>
-        </ul>
-        <button onclick="logout()">Cerrar Sesión</button>
-    </nav>
-    <main id="content">
-        <h2>Bienvenido, Auditor</h2>
+    <div class="container">
+        <h2>Panel de Auditor</h2>
         <p>Solo puedes acceder a los registros de auditoría.</p>
+        <nav>
+            <ul>
+                <li><a href="#auditorias" onclick="loadSection('auditoria')">Auditorías</a></li>
+            </ul>
+        </nav>
         <div id="data-container">
             <!-- Datos cargados dinámicamente desde la base de datos -->
         </div>
-    </main>
-    <script>
-        async function loadAuditorias() {
-            const response = await fetch('/api/auditorias', {
-                method: 'GET',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-            });
-            const data = await response.json();
-            document.getElementById('data-container').innerHTML = JSON.stringify(data, null, 2);
-        }
-
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('rol');
-            window.location.href = '../login/login.html';
-        }
-    </script>
+        <button class="logout" onclick="logout()">Cerrar Sesión</button>
+    </div>
 </body>
 </html>

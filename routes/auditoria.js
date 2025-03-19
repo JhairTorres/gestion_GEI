@@ -13,7 +13,7 @@ router.get('/', verifyToken, (req, res) => {
 });
 
 // Obtener un registro de auditoría por ID (Protegido)
-router.get('/:id', verifyToken, (req, res) => {
+router.get('/${id}', verifyToken, (req, res) => {
     const { id } = req.params;
     db.query('SELECT * FROM auditoria WHERE id = ?', [id], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
