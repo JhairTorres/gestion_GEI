@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Obtener todas las ubicaciones (Protegido)
 router.get('/', verifyToken, (req, res) => {
-    db.query('SELECT * FROM ubicaciones', (err, results) => {
+    db.query('SELECT id, pais, region, ciudad FROM ubicaciones', (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(results);
     });
@@ -15,22 +15,30 @@ router.get('/', verifyToken, (req, res) => {
 // Obtener una ubicación por ID (Protegido)
 router.get('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('SELECT * FROM ubicaciones WHERE id = ?', [id], (err, result) => {
+    db.query('SELECT id, pais, region, ciudad FROM ubicaciones WHERE id = ?', [id], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.status(404).json({ message: 'Ubicación no encontrada' });
-        res.json(result[0]);
+        if (results.length === 0) return res.status(404).json({ message: 'Ubicación no encontrada' });
+        res.json(results[0]);
     });
 });
 
 // Agregar una nueva ubicación (Protegido)
 router.post('/', verifyToken, (req, res) => {
-    const { nombre, latitud, longitud } = req.body;
+    const { pais, region, ciudad } = req.body;
+
+    if (!pais || !region || !ciudad) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
     db.query(
-        'INSERT INTO ubicaciones (nombre, latitud, longitud) VALUES (?, ?, ?)',
-        [nombre, latitud, longitud],
+        'INSERT INTO ubicaciones (pais, region, ciudad) VALUES (?, ?, ?)',
+        [pais, region, ciudad],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
-            res.json({ message: 'Ubicación agregada correctamente', id: result.insertId });
+            res.status(201).json({
+                message: 'Ubicación agregada correctamente',
+                id: result.insertId
+            });
         }
     );
 });
@@ -38,10 +46,15 @@ router.post('/', verifyToken, (req, res) => {
 // Actualizar una ubicación por ID (Protegido)
 router.put('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    const { nombre, latitud, longitud } = req.body;
+    const { pais, region, ciudad } = req.body;
+
+    if (!pais || !region || !ciudad) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
     db.query(
-        'UPDATE ubicaciones SET nombre = ?, latitud = ?, longitud = ? WHERE id = ?',
-        [nombre, latitud, longitud, id],
+        'UPDATE ubicaciones SET pais = ?, region = ?, ciudad = ? WHERE id = ?',
+        [pais, region, ciudad, id],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
             if (result.affectedRows === 0) return res.status(404).json({ message: 'Ubicación no encontrada' });
@@ -61,4 +74,3 @@ router.delete('/:id', verifyToken, (req, res) => {
 });
 
 module.exports = router;
-

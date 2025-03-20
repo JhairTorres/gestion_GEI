@@ -5,93 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Tipos de Gas</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="tipos_gas.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4e7d1;
-            margin: 0;
-        }
-
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 1000px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        nav button, button {
-            background-color: #a67c52;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        nav button:hover, button:hover {
-            background-color: #8b5e3b;
-        }
-
-        h2 {
-            color: #5a3e1b;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #8b5e3b;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2e6d4;
-        }
-
-        tr:hover {
-            background-color: #e0c9a6;
-        }
-
-        .section {
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            width: 100%;
-            background-color: #f8f1e5;
-        }
-
-        input {
-            padding: 8px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
+    <script src="tiposGas.js"></script>
 </head>
 <body>
     <div class="container">
@@ -106,26 +20,26 @@
         <div class="section">
             <h3>Buscar Tipo de Gas</h3>
             <input type="number" id="searchId" placeholder="ID Tipo de Gas">
-            <button onclick="searchTipoGas()">Buscar</button>
+            <button onclick="searchGei()">Buscar</button>
         </div>
 
         <!-- 🔹 Agregar Nuevo Tipo de Gas -->
         <div class="section">
             <h3>Agregar Nuevo Tipo de Gas</h3>
             <input type="text" id="nombre" placeholder="Nombre del Gas">
-            <input type="number" step="0.01" id="potencial_calentamiento_global" placeholder="Potencial de Calentamiento Global">
-            <button onclick="saveTipoGas()">Agregar</button>
+            <input type="number" step="0.01" id="potencialCalentamientoGlobal" placeholder="Potencial de Calentamiento Global">
+            <button onclick="saveGei()">Agregar</button>
         </div>
 
         <!-- 🔹 Actualizar Tipo de Gas por ID -->
         <div class="section">
             <h3>Actualizar Tipo de Gas</h3>
             <input type="number" id="updateId" placeholder="ID Tipo de Gas">
-            <input type="text" id="newNombre" placeholder="Nuevo Nombre del Gas">
-            <input type="number" step="0.01" id="newPotencial" placeholder="Nuevo Potencial de Calentamiento Global">
-            <button onclick="editTipoGas()">Actualizar</button>
+            <input type="text" id="updateNombre" placeholder="Nuevo Nombre del Gas">
+            <input type="number" step="0.01" id="updatePotencialCalentamientoGlobal" placeholder="Nuevo Potencial de Calentamiento Global">
+            <button onclick="updateGei()">Actualizar</button>
         </div>
-        
+
         <!-- 🔹 Tabla de Tipos de Gas -->
         <h3>Registros de Tipos de Gas</h3>
         <table>
@@ -136,7 +50,7 @@
                     <th>Potencial de Calentamiento Global</th>
                 </tr>
             </thead>
-            <tbody id="tipos-gas-table"></tbody>
+            <tbody id="gei-table"></tbody>
         </table>
     </div>
 </body>

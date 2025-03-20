@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../config/db');
 const verifyToken = require('../config/verify');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 // Obtener todos los usuarios
@@ -24,29 +25,38 @@ router.get('/:id', verifyToken, (req, res) => {
     });
 });
 
-// 🔹 Agregar un usuario
 router.post('/', verifyToken, (req, res) => {
-    const { nombre, correo, rol } = req.body;
+    const { nombre, correo, clave, rol } = req.body;
 
     // Validación de datos
-    if (!nombre || !correo || !rol) {
+    if (!nombre || !correo || !clave || !rol) {
         return res.status(400).json({ message: 'Todos los campos son requeridos' });
     }
 
-    // Insertar en la base de datos
-    db.query(
-        'INSERT INTO usuarios (nombre, correo, rol) VALUES (?, ?, ?)',
-        [nombre, correo, rol],
-        (err, result) => {
-            if (err) return res.status(500).json({ error: err.message });
-
-            res.status(201).json({
-                message: 'Usuario agregado correctamente',
-                usuarioId: result.insertId
-            });
+    // Hashear la clave usando bcrypt con callback
+    bcrypt.hash(clave, 10, (err, hashedClave) => {
+        if (err) {
+            console.error("Error al hashear la contraseña:", err);
+            return res.status(500).json({ error: "Error al procesar la contraseña" });
         }
-    );
+
+        // Insertar en la base de datos con la clave cifrada
+        db.query(
+            'INSERT INTO usuarios (nombre, correo, clave, rol) VALUES (?, ?, ?, ?)',
+            [nombre, correo, hashedClave, rol],  // Se usa la clave hasheada
+            (err, result) => {
+                if (err) return res.status(500).json({ error: err.message });
+
+                res.status(201).json({
+                    message: 'Usuario agregado correctamente',
+                    usuarioId: result.insertId
+                });
+            }
+        );
+    });
 });
+
+
 
 // Editar usuario por ID
 router.put('/:id', verifyToken, (req, res) => {

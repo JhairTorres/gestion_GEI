@@ -4,59 +4,83 @@ const verifyToken = require('../config/verify');
 
 const router = express.Router();
 
-// Obtener todas las fuentes de emisión (Protegido)
+// Obtener todas las fuentes emisoras (Protegido)
 router.get('/', verifyToken, (req, res) => {
-    db.query('SELECT * FROM fuentes', (err, results) => {
+    db.query('SELECT * FROM fuentes_emisoras', (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(results);
     });
 });
 
-// Obtener una fuente de emisión por ID (Protegido)
+// Obtener una fuente emisora por ID (Protegido)
 router.get('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('SELECT * FROM fuentes WHERE id = ?', [id], (err, result) => {
+    db.query('SELECT * FROM fuentes_emisoras WHERE id = ?', [id], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.status(404).json({ message: 'Fuente no encontrada' });
-        res.json(result[0]);
+        if (results.length === 0) return res.status(404).json({ message: 'Fuente emisora no encontrada' });
+        res.json(results[0]);
     });
 });
 
-// Agregar una nueva fuente de emisión (Protegido)
+// Agregar una nueva fuente emisora (Protegido)
 router.post('/', verifyToken, (req, res) => {
-    const { nombre, tipo, descripcion } = req.body;
+    const { nombre, sector } = req.body;
+
+    if (!nombre || !sector) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
+    const sectoresValidos = ['Transporte', 'Energía', 'Industria', 'Agricultura', 'Residuos', 'Otros'];
+    if (!sectoresValidos.includes(sector)) {
+        return res.status(400).json({ message: 'Sector no válido' });
+    }
+
     db.query(
-        'INSERT INTO fuentes (nombre, tipo, descripcion) VALUES (?, ?, ?)',
-        [nombre, tipo, descripcion],
+        'INSERT INTO fuentes_emisoras (nombre, sector) VALUES (?, ?)',
+        [nombre, sector],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
-            res.json({ message: 'Fuente agregada correctamente', id: result.insertId });
+            res.status(201).json({
+                message: 'Fuente emisora agregada correctamente',
+                id: result.insertId
+            });
         }
     );
 });
 
-// Actualizar una fuente de emisión por ID (Protegido)
+// Actualizar una fuente emisora por ID (Protegido)
 router.put('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    const { nombre, tipo, descripcion } = req.body;
+    const { nombre, sector } = req.body;
+
+    if (!nombre || !sector) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
+    const sectoresValidos = ['Transporte', 'Energía', 'Industria', 'Agricultura', 'Residuos', 'Otros'];
+    if (!sectoresValidos.includes(sector)) {
+        return res.status(400).json({ message: 'Sector no válido' });
+    }
+
     db.query(
-        'UPDATE fuentes SET nombre = ?, tipo = ?, descripcion = ? WHERE id = ?',
-        [nombre, tipo, descripcion, id],
+        'UPDATE fuentes_emisoras SET nombre = ?, sector = ? WHERE id = ?',
+        [nombre, sector, id],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
-            if (result.affectedRows === 0) return res.status(404).json({ message: 'Fuente no encontrada' });
-            res.json({ message: 'Fuente de emisión actualizada' });
+            if (result.affectedRows === 0) return res.status(404).json({ message: 'Fuente emisora no encontrada' });
+            res.json({ message: 'Fuente emisora actualizada correctamente' });
         }
     );
 });
 
-// Eliminar una fuente de emisión por ID (Protegido)
+// Eliminar una fuente emisora por ID (Protegido)
 router.delete('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('DELETE FROM fuentes WHERE id = ?', [id], (err, result) => {
+
+    db.query('DELETE FROM fuentes_emisoras WHERE id = ?', [id], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.affectedRows === 0) return res.status(404).json({ message: 'Fuente no encontrada' });
-        res.json({ message: 'Fuente de emisión eliminada' });
+        if (result.affectedRows === 0) return res.status(404).json({ message: 'Fuente emisora no encontrada' });
+        res.json({ message: 'Fuente emisora eliminada correctamente' });
     });
 });
 

@@ -6,92 +6,7 @@
     <title>Gestión de Ubicaciones</title>
     <link rel="stylesheet" href="../../styles.css">
     <script src="ubicaciones.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4e7d1;
-            margin: 0;
-        }
-
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 1000px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        nav button, button {
-            background-color: #a67c52;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        nav button:hover, button:hover {
-            background-color: #8b5e3b;
-        }
-
-        h2 {
-            color: #5a3e1b;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #8b5e3b;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2e6d4;
-        }
-
-        tr:hover {
-            background-color: #e0c9a6;
-        }
-
-        .section {
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            width: 100%;
-            background-color: #f8f1e5;
-        }
-
-        input {
-            padding: 8px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -122,10 +37,10 @@
         <div class="section">
             <h3>Actualizar Ubicación</h3>
             <input type="number" id="updateId" placeholder="ID Ubicación">
-            <input type="text" id="newPais" placeholder="Nuevo País">
-            <input type="text" id="newRegion" placeholder="Nueva Región">
-            <input type="text" id="newCiudad" placeholder="Nueva Ciudad">
-            <button onclick="editUbicacion()">Actualizar</button>
+            <input type="text" id="updatePais" placeholder="Nuevo País">
+            <input type="text" id="updateRegion" placeholder="Nueva Región">
+            <input type="text" id="updateCiudad" placeholder="Nueva Ciudad">
+            <button onclick="updateUbicacion()">Actualizar</button>
         </div>
 
         <!-- 🔹 Eliminar Ubicación por ID -->

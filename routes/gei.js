@@ -4,59 +4,73 @@ const verifyToken = require('../config/verify');
 
 const router = express.Router();
 
-// Obtener todos los gases de efecto invernadero (Protegido)
+// Obtener todos los tipos de gas (Protegido)
 router.get('/', verifyToken, (req, res) => {
-    db.query('SELECT * FROM gei', (err, results) => {
+    db.query('SELECT * FROM tipos_gas', (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(results);
     });
 });
 
-// Obtener un GEI por ID (Protegido)
+// Obtener un tipo de gas por ID (Protegido)
 router.get('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('SELECT * FROM gei WHERE id = ?', [id], (err, result) => {
+    db.query('SELECT * FROM tipos_gas WHERE id = ?', [id], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.status(404).json({ message: 'GEI no encontrado' });
-        res.json(result[0]);
+        if (results.length === 0) return res.status(404).json({ message: 'Tipo de gas no encontrado' });
+        res.json(results[0]);
     });
 });
 
-// Agregar un nuevo GEI (Protegido)
+// Agregar un nuevo tipo de gas (Protegido)
 router.post('/', verifyToken, (req, res) => {
-    const { nombre, descripcion } = req.body;
+    const { nombre, potencial_calentamiento_global } = req.body;
+
+    if (!nombre || potencial_calentamiento_global === undefined) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
     db.query(
-        'INSERT INTO gei (nombre, descripcion) VALUES (?, ?)',
-        [nombre, descripcion],
+        'INSERT INTO tipos_gas (nombre, potencial_calentamiento_global) VALUES (?, ?)',
+        [nombre, potencial_calentamiento_global],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
-            res.json({ message: 'GEI agregado correctamente', id: result.insertId });
+            res.status(201).json({
+                message: 'Tipo de gas agregado correctamente',
+                id: result.insertId
+            });
         }
     );
 });
 
-// Actualizar un GEI por ID (Protegido)
+// Actualizar un tipo de gas por ID (Protegido)
 router.put('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    const { nombre, descripcion } = req.body;
+    const { nombre, potencial_calentamiento_global } = req.body;
+
+    if (!nombre || potencial_calentamiento_global === undefined) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
     db.query(
-        'UPDATE gei SET nombre = ?, descripcion = ? WHERE id = ?',
-        [nombre, descripcion, id],
+        'UPDATE tipos_gas SET nombre = ?, potencial_calentamiento_global = ? WHERE id = ?',
+        [nombre, potencial_calentamiento_global, id],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
-            if (result.affectedRows === 0) return res.status(404).json({ message: 'GEI no encontrado' });
-            res.json({ message: 'GEI actualizado correctamente' });
+            if (result.affectedRows === 0) return res.status(404).json({ message: 'Tipo de gas no encontrado' });
+            res.json({ message: 'Tipo de gas actualizado correctamente' });
         }
     );
 });
 
-// Eliminar un GEI por ID (Protegido)
+// Eliminar un tipo de gas por ID (Protegido)
 router.delete('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('DELETE FROM gei WHERE id = ?', [id], (err, result) => {
+
+    db.query('DELETE FROM tipos_gas WHERE id = ?', [id], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.affectedRows === 0) return res.status(404).json({ message: 'GEI no encontrado' });
-        res.json({ message: 'GEI eliminado correctamente' });
+        if (result.affectedRows === 0) return res.status(404).json({ message: 'Tipo de gas no encontrado' });
+        res.json({ message: 'Tipo de gas eliminado correctamente' });
     });
 });
 

@@ -80,10 +80,10 @@ async function saveUsuario() {
 
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
-    const clave = document.getElementById("clave").value;
+    const password = document.getElementById("password").value;
     const rol = document.getElementById("rol").value;
 
-    if (!nombre || !correo || !clave) {
+    if (!nombre || !correo || !password || !rol) {
         alert("Todos los campos son obligatorios");
         return;
     }
@@ -93,7 +93,7 @@ async function saveUsuario() {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, correo, clave, rol })
+            body: JSON.stringify({ nombre, correo, clave: password, rol })
         });
 
         if (!response.ok) throw new Error('Error al agregar usuario');

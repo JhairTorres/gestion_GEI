@@ -1,170 +1,198 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const API_URL = "http://localhost:5000/api/auditoria";
-    const token =localStorage.getItem("token");
-    if (!token) {
-        alert("No tienes permiso para acceder a esta página.");
+async function checkSession() {
+    try {
+        const response = await fetch('http://localhost:5000/api/auth/session', {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data.authenticated;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Error al verificar sesión:', error);
+        return false;
+    }
+}
+
+async function checkToken() {
+    const isAuthenticated = await checkSession();
+
+    if (!isAuthenticated) {
+        console.warn("Sesión inválida, redirigiendo al login.");
         window.location.href = "../../login/login.html";
+        return false;
+    }
+    return true;
+}
+
+// Obtener todos los registros de auditoría
+async function fetchAuditorias() {
+    if (!(await checkToken())) return;
+
+    try {
+        const response = await fetch('http://localhost:5000/api/auditoria/', {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Error al obtener las auditorías');
+
+        const auditorias = await response.json();
+        renderAuditorias(auditorias);
+    } catch (error) {
+        console.error("Error al cargar auditorías:", error);
+    }
+}
+
+// Buscar una auditoría por ID
+async function searchAuditoria() {
+    if (!(await checkToken())) return;
+
+    const id = document.getElementById("searchId").value;
+    if (!id) {
+        alert("Ingrese un ID válido");
         return;
     }
-    console.log("Token encontrado:", token);
 
-    const tableBody = document.getElementById("auditorias-table");
-    const searchResult = document.getElementById("resultadoBusqueda");
-    const errorMsg = document.createElement("p");
-    document.body.appendChild(errorMsg);
+    try {
+        const response = await fetch(`http://localhost:5000/api/auditoria/${id}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
 
-    let data = null
+        if (!response.ok) throw new Error(`Registro de auditoría con ID ${id} no encontrado`);
 
-    async function fetchAuditoria() {
-        try {
-            const response = await fetch(API_URL, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+        const auditoria = await response.json();
+        alert(`Registro encontrado:\nUsuario ID: ${auditoria.usuario_id}\nAcción: ${auditoria.accion}\nDescripción: ${auditoria.descripcion}\nFecha: ${auditoria.fecha}`);
+    } catch (error) {
+        console.error("Error al buscar auditoría:", error);
+        alert("Error al buscar auditoría. Verifique el ID.");
+    }
+}
 
-            if (!response.ok) throw new Error("Error al obtener registros");
+// Agregar un nuevo registro de auditoría
+async function saveAuditoria() {
+    if (!(await checkToken())) return;
 
-            const data = await response.json();
-            tableBody.innerHTML = "";
-            data.forEach(item => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${item.id}</td>
-                    <td>${item.usuario_id}</td>
-                    <td>${item.accion}</td>
-                    <td>${new Date(item.fecha).toLocaleString()}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        } catch (error) {
-            errorMsg.textContent = error.message;
-        }
+    const usuario_id = document.getElementById("usuarioId").value;
+    const accion = document.getElementById("accion").value;
+    const fecha = document.getElementById("fecha").value;
+
+    if (!usuario_id || !accion  || !fecha) {
+        alert("Todos los campos son obligatorios");
+        return;
     }
 
-    window.searchById = async function () {
-        let data = null
-        const id = document.getElementById("buscarId").value.trim();
-        const resultadoBusqueda = document.getElementById("resultadoBusqueda");
-    
-        if (!id) {
-            resultadoBusqueda.textContent = "Ingrese un ID válido.";
-            return;
-        }
-    
-        try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token",data.token)}`,
-                    "Content-Type": "application/json"
-                }
-            });
-    
-            if (!response.ok) {
-                throw new Error("Error al obtener los datos");
-            }
-    
-            const data = await response.json(); // Asegurar que data se define correctamente
-    
-            resultadoBusqueda.textContent = `Resultado: ${JSON.stringify(data)}`;
-        } catch (error) {
-            resultadoBusqueda.textContent = "No se pudo obtener la auditoría.";
-            console.error("Error:", error);
-        }
-    };
-    
-    
-    window.saveAuditoria = async function () {
-        const usuario_id = document.getElementById("usuarioId").value.trim();
-        const accion = document.getElementById("accion").value.trim();
-        const fecha = document.getElementById("fecha").value.trim();
-        const errorMsg = document.getElementById("errorMsg"); // Asegúrate de que exista este elemento
-    
-        if (!usuario_id || !accion || !fecha) {
-            errorMsg.textContent = "Todos los campos son obligatorios.";
-            return;
-        }
-    
-        try {
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ usuario_id, accion, fecha })
-            });
-    
-            if (!response.ok) throw new Error("Error al agregar registro");
-    
-            alert("Registro agregado correctamente");
-            window.fetchAuditoria();
-        } catch (error) {
-            errorMsg.textContent = error.message;
-        }
-    };
-    
-    window.editAuditoria = async function () {
-        const id = document.getElementById("updateId").value.trim();
-        const accion = document.getElementById("nuevaAccion").value.trim();
-        const fecha = document.getElementById("fecha").value.trim();
-        const errorMsg = document.getElementById("errorMsg");
-    
-        if (!id || !accion || !fecha) {
-            errorMsg.textContent = "Todos los campos son obligatorios.";
-            return;
-        }
-    
-        try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ accion, fecha })
-            });
-    
-            if (!response.ok) throw new Error("Error al actualizar registro");
-    
-            alert("Registro actualizado correctamente");
-            window.fetchAuditoria();
-        } catch (error) {
-            errorMsg.textContent = error.message;
-        }
-    };
-    
-    window.deleteAuditoria = async function () {
-        const id = document.getElementById("deleteId").value.trim();
-        if (!id) {
-            alert("Ingrese un ID válido.");
-            return;
-        }
-    
-        if (!confirm("¿Seguro que quieres eliminar este registro?")) return;
-    
-        try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` }
-            });
-    
-            if (!response.ok) throw new Error("Error al eliminar registro");
-    
-            alert("Registro eliminado correctamente");
-            window.fetchAuditoria();
-        } catch (error) {
-            errorMsg.textContent = error.message;
-        }
-    };
-    
+    try {
+        const response = await fetch('http://localhost:5000/api/auditoria/', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usuario_id, accion, fecha })
+        });
 
-fetchAuditoria();
-});
+        if (!response.ok) throw new Error('Error al agregar auditoría');
 
-function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('rol');
-    alert('Tu sesión ha expirado. Serás redirigido al login.');
-    window.location.href = '../../login/login.html';
+        alert("Registro de auditoría agregado con éxito");
+        fetchAuditorias();
+    } catch (error) {
+        console.error("Error al agregar auditoría:", error);
+        alert("No se pudo agregar el registro de auditoría");
+    }
 }
+// Actualizar un registro de auditoría por ID
+async function updateAuditoria() {
+    if (!(await checkToken())) return;
+
+    const id = document.getElementById("updateId").value;
+    const usuario_id = document.getElementById("updateUsuarioId").value;
+    const accion = document.getElementById("updateAccion").value;
+    const fecha = document.getElementById("updateFecha").value;
+
+    if (!id || !usuario_id || !accion || !fecha) {
+        alert("Todos los campos son obligatorios");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/auditoria/${id}`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usuario_id, accion, fecha })
+        });
+
+        if (!response.ok) throw new Error('Error al actualizar auditoría');
+
+        alert("Registro de auditoría actualizado con éxito");
+        fetchAuditorias();
+    } catch (error) {
+        console.error("Error al actualizar auditoría:", error);
+        alert("No se pudo actualizar el registro de auditoría");
+    }
+}
+
+
+// Eliminar un registro de auditoría por ID
+async function deleteAuditoria() {
+    if (!(await checkToken())) return;
+
+    const id = document.getElementById("deleteId").value;
+    if (!id) {
+        alert("Ingrese un ID válido");
+        return;
+    }
+
+    if (!confirm("¿Seguro que deseas eliminar este registro de auditoría?")) return;
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/auditoria/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Error al eliminar auditoría');
+
+        alert("Registro de auditoría eliminado con éxito");
+        fetchAuditorias();
+    } catch (error) {
+        console.error("Error al eliminar auditoría:", error);
+        alert("No se pudo eliminar el registro de auditoría");
+    }
+}
+
+// Renderizar tabla de auditorías
+function renderAuditorias(auditorias) {
+    const tabla = document.getElementById("auditorias-table");
+    tabla.innerHTML = "";
+
+    auditorias.forEach(auditoria => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${auditoria.id}</td>
+            <td>${auditoria.usuario_id}</td>
+            <td>${auditoria.accion}</td>
+            <td>${auditoria.fecha}</td>
+        `;
+        tabla.appendChild(row);
+    });
+}
+
+// Cerrar sesión
+async function logout() {
+    try {
+        await fetch('http://localhost:5000/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+    } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+    }
+    window.location.href = "../../login/login.html";
+}
+
+// Cargar auditorías al iniciar
+fetchAuditorias();
