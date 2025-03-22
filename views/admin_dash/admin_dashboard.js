@@ -38,7 +38,8 @@ async function loadSection(section) {
         'emisiones': 'emisiones/emisiones.html',
         'fuentes': 'fuentes/fuentes.html',
         'gei': 'tiposGas/tiposGas.html',
-        'ubicaciones': 'ubicaciones/ubicaciones.html'
+        'ubicaciones': 'ubicaciones/ubicaciones.html',
+        'sensores': 'sensores/sensores.html'
     };
 
     if (pageMap[section]) {

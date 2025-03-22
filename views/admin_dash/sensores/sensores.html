@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Sensores</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <script src="sensores.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button onclick="window.location.href='../admin_dashboard.html'">Volver al Panel</button>
+            <button onclick="logout()">Cerrar Sesión</button>
+        </nav>
+
+        <h2>Gestión de Sensores</h2>
+
+        <!-- 🔹 Buscar Sensor por ID -->
+        <div class="section">
+            <h3>Buscar Sensor</h3>
+            <input type="number" id="searchId" placeholder="ID Sensor">
+            <button onclick="searchSensor()">Buscar</button>
+        </div>
+
+        <!-- 🔹 Agregar Nuevo Sensor -->
+        <div class="section">
+            <h3>Agregar Nuevo Sensor</h3>
+            <input type="text" id="nombre_sensor" placeholder="Nombre del Sensor">
+            <input type="number" id="id_ubicacion" placeholder="ID Ubicación">
+            <input type="number" id="latitud" placeholder="Latitud">
+            <input type="number" id="longitud" placeholder="Longitud">
+            <button onclick="saveSensor()">Agregar</button>
+        </div>
+
+        <!-- 🔹 Actualizar Sensor -->
+        <div class="section">
+            <h3>Actualizar Sensor</h3>
+            <input type="number" id="updateId" placeholder="ID Sensor">
+            <input type="text" id="newNombreSensor" placeholder="Nuevo Nombre">
+            <input type="number" id="newIdUbicacion" placeholder="Nuevo ID Ubicación">
+            <input type="number" id="newLatitud" placeholder="Nueva Latitud">
+            <input type="number" id="newLongitud" placeholder="Nueva Longitud">
+            <button onclick="editSensor()">Actualizar</button>
+        </div>
+
+        <!-- 🔹 Eliminar Sensor -->
+        <div class="section">
+            <h3>Eliminar Sensor</h3>
+            <input type="number" id="deleteId" placeholder="ID Sensor">
+            <button onclick="deleteSensor()">Eliminar</button>
+        </div>
+
+        <!-- 🔹 Tabla de Sensores -->
+        <h3>Registros de Sensores</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>ID Ubicación</th>
+                    <th>Geolocalización</th>
+                </tr>
+            </thead>
+            <tbody id="sensores-table"></tbody>
+        </table>
+        <h3>Mapa de Sensores</h3>
+        <div style="width: 100%; height: 500px; border: 1px solid #ccc; margin-bottom: 20px;">
+        <iframe src="/mapas/mapa_sensores.html" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        </div>
+
+    <!-- 🔹 Mapa de Sensores -->
+
+</body>
+</html>

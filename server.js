@@ -39,6 +39,7 @@ const fuentesRoutes = require('./routes/fuentes');
 const ubicacionesRoutes = require('./routes/ubicaciones');
 const emisionesRoutes = require('./routes/emisiones');
 const auditoriaRoutes = require('./routes/auditoria');
+const sensoresRoutes = require('./routes/sensores');
 
 // Usar las rutas
 app.use('/api/auth', authRoutes);
@@ -48,7 +49,8 @@ app.use('/api/ubicaciones', ubicacionesRoutes);
 app.use('/api/emisiones', emisionesRoutes);
 app.use('/api/auditoria', auditoriaRoutes);
 app.use('/api/usuarios', userRoutes);
-
+app.use('/api/sensores', sensoresRoutes);
+app.use(express.static(path.join(__dirname, 'public')));
 // Middleware de manejo de errores global
 app.use((err, req, res, next) => {
     console.error('❌ Error:', err.message);

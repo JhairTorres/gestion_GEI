@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_66a5a98130549773301891234fb9b8b2 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_66a5a98130549773301891234fb9b8b2" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_66a5a98130549773301891234fb9b8b2 = L.map(
+                "map_66a5a98130549773301891234fb9b8b2",
+                {
+                    center: [40.06834285714286, -10.683885714285713],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a37e37450066a811fc83de2828ad2a9f = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a37e37450066a811fc83de2828ad2a9f.addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var marker_b21260e05035d2030932fb4bc2d69128 = L.marker(
+                [19.4326, -99.1332],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_d53fb9eb2f0c9dab58711934ac65c3a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_597892a438cdf7b89c83a1dac9baac10 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9bd1969e55981abdd6b7bbdcd13e13a9 = $(`<div id="html_9bd1969e55981abdd6b7bbdcd13e13a9" style="width: 100.0%; height: 100.0%;">Sensor México Norte (ID 1)</div>`)[0];
+                popup_597892a438cdf7b89c83a1dac9baac10.setContent(html_9bd1969e55981abdd6b7bbdcd13e13a9);
+            
+        
+
+        marker_b21260e05035d2030932fb4bc2d69128.bindPopup(popup_597892a438cdf7b89c83a1dac9baac10)
+        ;
+
+        
+    
+    
+                marker_b21260e05035d2030932fb4bc2d69128.setIcon(icon_d53fb9eb2f0c9dab58711934ac65c3a8);
+            
+    
+            var marker_edc0c6ece09d3f21d9d52ba07dc4f742 = L.marker(
+                [36.0611, 103.8198],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_723d1b93bbedfd2717cd7de709528580 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_25674d910945d47a8f8c850b6e4ec1ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3846888369fe7be63c892ed87584d89a = $(`<div id="html_3846888369fe7be63c892ed87584d89a" style="width: 100.0%; height: 100.0%;">Sensor China Oeste (ID 2)</div>`)[0];
+                popup_25674d910945d47a8f8c850b6e4ec1ea.setContent(html_3846888369fe7be63c892ed87584d89a);
+            
+        
+
+        marker_edc0c6ece09d3f21d9d52ba07dc4f742.bindPopup(popup_25674d910945d47a8f8c850b6e4ec1ea)
+        ;
+
+        
+    
+    
+                marker_edc0c6ece09d3f21d9d52ba07dc4f742.setIcon(icon_723d1b93bbedfd2717cd7de709528580);
+            
+    
+            var marker_11385d404bfa2a34dccf98982e842d9f = L.marker(
+                [48.1351, 11.581],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_13edac1f9a8f45ad8efe2221decf5023 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9cbcd8e140c043264abf27b2c3fda22a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2b5e915eabc98c3d27f60b415caf2f59 = $(`<div id="html_2b5e915eabc98c3d27f60b415caf2f59" style="width: 100.0%; height: 100.0%;">Sensor Alemania Sur (ID 3)</div>`)[0];
+                popup_9cbcd8e140c043264abf27b2c3fda22a.setContent(html_2b5e915eabc98c3d27f60b415caf2f59);
+            
+        
+
+        marker_11385d404bfa2a34dccf98982e842d9f.bindPopup(popup_9cbcd8e140c043264abf27b2c3fda22a)
+        ;
+
+        
+    
+    
+                marker_11385d404bfa2a34dccf98982e842d9f.setIcon(icon_13edac1f9a8f45ad8efe2221decf5023);
+            
+    
+            var marker_465fdaf8ed7f4810c3253c85a09690c1 = L.marker(
+                [41.8781, -87.6298],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_92eac022d090712d4a4ab7707f2079a1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f9d00865803f310e3e168f7c5f1a1d0b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5614e16792dcfe21d597a27bfd233826 = $(`<div id="html_5614e16792dcfe21d597a27bfd233826" style="width: 100.0%; height: 100.0%;">Sensor USA Norte (ID 4)</div>`)[0];
+                popup_f9d00865803f310e3e168f7c5f1a1d0b.setContent(html_5614e16792dcfe21d597a27bfd233826);
+            
+        
+
+        marker_465fdaf8ed7f4810c3253c85a09690c1.bindPopup(popup_f9d00865803f310e3e168f7c5f1a1d0b)
+        ;
+
+        
+    
+    
+                marker_465fdaf8ed7f4810c3253c85a09690c1.setIcon(icon_92eac022d090712d4a4ab7707f2079a1);
+            
+    
+            var marker_8fa96a8b3be78b413be34027667e7e83 = L.marker(
+                [52.4862, -1.8904],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_4976210c98fef55341715c60b69e3135 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ab81644d0698d071e5d0adc067b52614 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c3786aa67817cc7c7b379639e1a2d4e0 = $(`<div id="html_c3786aa67817cc7c7b379639e1a2d4e0" style="width: 100.0%; height: 100.0%;">Sensor Reino Unido Centro (ID 5)</div>`)[0];
+                popup_ab81644d0698d071e5d0adc067b52614.setContent(html_c3786aa67817cc7c7b379639e1a2d4e0);
+            
+        
+
+        marker_8fa96a8b3be78b413be34027667e7e83.bindPopup(popup_ab81644d0698d071e5d0adc067b52614)
+        ;
+
+        
+    
+    
+                marker_8fa96a8b3be78b413be34027667e7e83.setIcon(icon_4976210c98fef55341715c60b69e3135);
+            
+    
+            var marker_59319d01aa5249a7e29890991b3f5909 = L.marker(
+                [45.764, 4.8357],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_03d6d0cce32010e310493c80fcc33924 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9d94ca1713f594ce43baa0955956f6fe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6bcafa8c4203ca162ffdd64e07d67462 = $(`<div id="html_6bcafa8c4203ca162ffdd64e07d67462" style="width: 100.0%; height: 100.0%;">Sensor Francia Sur (ID 6)</div>`)[0];
+                popup_9d94ca1713f594ce43baa0955956f6fe.setContent(html_6bcafa8c4203ca162ffdd64e07d67462);
+            
+        
+
+        marker_59319d01aa5249a7e29890991b3f5909.bindPopup(popup_9d94ca1713f594ce43baa0955956f6fe)
+        ;
+
+        
+    
+    
+                marker_59319d01aa5249a7e29890991b3f5909.setIcon(icon_03d6d0cce32010e310493c80fcc33924);
+            
+    
+            var marker_64a78bc6ddb1343499241123afdbd267 = L.marker(
+                [36.7213, -6.3703],
+                {
+}
+            ).addTo(map_66a5a98130549773301891234fb9b8b2);
+        
+    
+            var icon_c80a757bc6d06fe366b612688c641b9c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f5f5bedc0af5243345967ac7f7fbd9f4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d2f42f3497749abdc74aa586cfe0d572 = $(`<div id="html_d2f42f3497749abdc74aa586cfe0d572" style="width: 100.0%; height: 100.0%;">Sensor España Oeste (ID 7)</div>`)[0];
+                popup_f5f5bedc0af5243345967ac7f7fbd9f4.setContent(html_d2f42f3497749abdc74aa586cfe0d572);
+            
+        
+
+        marker_64a78bc6ddb1343499241123afdbd267.bindPopup(popup_f5f5bedc0af5243345967ac7f7fbd9f4)
+        ;
+
+        
+    
+    
+                marker_64a78bc6ddb1343499241123afdbd267.setIcon(icon_c80a757bc6d06fe366b612688c641b9c);
+            
+</script>
+</html>
