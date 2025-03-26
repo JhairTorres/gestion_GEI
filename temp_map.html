@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_95b915921d027e4bff260938feda11af {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_95b915921d027e4bff260938feda11af" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_95b915921d027e4bff260938feda11af = L.map(
+                "map_95b915921d027e4bff260938feda11af",
+                {
+                    center: [14.201375000000002, 35.91757499999999],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": true,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_95b915921d027e4bff260938feda11af);
+
+            
+
+        
+    
+            var tile_layer_27ddba1100b838201f7e4b2fbc72de76 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_27ddba1100b838201f7e4b2fbc72de76.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_edbc8c7a1030d4472e802f26317377da = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_edbc8c7a1030d4472e802f26317377da.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_979394c48626df10dc814156edf50019 = L.marker(
+                [48.1351, 11.582],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_d5a19f1fb7d1f7a22f7a82c30e1bd90c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_ab9d469fa8081326edbc1189f99974b7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f1c8e21eafac7adb1c80135881d0f948 = $(`<div id="html_f1c8e21eafac7adb1c80135881d0f948" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-010</h4>                     <p><b>ID:</b> 37</p>                     <p><b>Ubicación:</b> Múnich, Baviera</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 48.1351, 11.582</p>                 </div>                 </div>`)[0];
+                popup_ab9d469fa8081326edbc1189f99974b7.setContent(html_f1c8e21eafac7adb1c80135881d0f948);
+            
+        
+
+        marker_979394c48626df10dc814156edf50019.bindPopup(popup_ab9d469fa8081326edbc1189f99974b7)
+        ;
+
+        
+    
+    
+            marker_979394c48626df10dc814156edf50019.bindTooltip(
+                `<div>
+                     Sensor AQM-010 - Múnich
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_979394c48626df10dc814156edf50019.setIcon(icon_d5a19f1fb7d1f7a22f7a82c30e1bd90c);
+            
+    
+            marker_cluster_edbc8c7a1030d4472e802f26317377da.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_189a178be8c0baea0a478c2cd59bceb3 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_189a178be8c0baea0a478c2cd59bceb3.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_98718cf2b11b823def9ad46ee7b75d29 = L.marker(
+                [-34.6037, -58.3816],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_1fb945d52082881e9eb7f454b91a5d4d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_6c5d6d3aee8dfbda58f2cb6f68bd6f3a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b064432355e365feaba3dfb3c7e9bda5 = $(`<div id="html_b064432355e365feaba3dfb3c7e9bda5" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-005</h4>                     <p><b>ID:</b> 32</p>                     <p><b>Ubicación:</b> Buenos Aires, Buenos Aires</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -34.6037, -58.3816</p>                 </div>                 </div>`)[0];
+                popup_6c5d6d3aee8dfbda58f2cb6f68bd6f3a.setContent(html_b064432355e365feaba3dfb3c7e9bda5);
+            
+        
+
+        marker_98718cf2b11b823def9ad46ee7b75d29.bindPopup(popup_6c5d6d3aee8dfbda58f2cb6f68bd6f3a)
+        ;
+
+        
+    
+    
+            marker_98718cf2b11b823def9ad46ee7b75d29.bindTooltip(
+                `<div>
+                     Sensor AQM-005 - Buenos Aires
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_98718cf2b11b823def9ad46ee7b75d29.setIcon(icon_1fb945d52082881e9eb7f454b91a5d4d);
+            
+    
+            marker_cluster_189a178be8c0baea0a478c2cd59bceb3.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_9ee6a21c6e186e3d0c1a7512048bfe5c = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_9ee6a21c6e186e3d0c1a7512048bfe5c.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_b257abf9a119ce022eb737cf4a6ef264 = L.marker(
+                [-33.8688, 151.2093],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_9f3ec2b13c304bf23a37b7f9875338de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_5b69e7d40d23bf06c9425ca8868fa29a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_725c4f093fe696a12e29b1557ccd282a = $(`<div id="html_725c4f093fe696a12e29b1557ccd282a" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-025</h4>                     <p><b>ID:</b> 52</p>                     <p><b>Ubicación:</b> Sídney, Nueva Gales del Sur</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -33.8688, 151.2093</p>                 </div>                 </div>`)[0];
+                popup_5b69e7d40d23bf06c9425ca8868fa29a.setContent(html_725c4f093fe696a12e29b1557ccd282a);
+            
+        
+
+        marker_b257abf9a119ce022eb737cf4a6ef264.bindPopup(popup_5b69e7d40d23bf06c9425ca8868fa29a)
+        ;
+
+        
+    
+    
+            marker_b257abf9a119ce022eb737cf4a6ef264.bindTooltip(
+                `<div>
+                     Sensor AQM-025 - Sídney
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b257abf9a119ce022eb737cf4a6ef264.setIcon(icon_9f3ec2b13c304bf23a37b7f9875338de);
+            
+    
+            var marker_c6739b4bd21e987a1d0537509c6c74b0 = L.marker(
+                [-37.8136, 144.9631],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_af3d881db5e4eb34521e36c71a9d1196 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_17ae2eb750b2669f0534469bb2e6a31e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_634bbd917e6c5351dbfd77423a26b395 = $(`<div id="html_634bbd917e6c5351dbfd77423a26b395" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-026</h4>                     <p><b>ID:</b> 53</p>                     <p><b>Ubicación:</b> Melbourne, Victoria</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -37.8136, 144.9631</p>                 </div>                 </div>`)[0];
+                popup_17ae2eb750b2669f0534469bb2e6a31e.setContent(html_634bbd917e6c5351dbfd77423a26b395);
+            
+        
+
+        marker_c6739b4bd21e987a1d0537509c6c74b0.bindPopup(popup_17ae2eb750b2669f0534469bb2e6a31e)
+        ;
+
+        
+    
+    
+            marker_c6739b4bd21e987a1d0537509c6c74b0.bindTooltip(
+                `<div>
+                     Sensor AQM-026 - Melbourne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c6739b4bd21e987a1d0537509c6c74b0.setIcon(icon_af3d881db5e4eb34521e36c71a9d1196);
+            
+    
+            marker_cluster_9ee6a21c6e186e3d0c1a7512048bfe5c.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_84ef69547fc39e1b4cc0ac4ae439417a = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_84ef69547fc39e1b4cc0ac4ae439417a.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_4f372d103b7c5d44f7525935b2d6b4c4 = L.marker(
+                [-23.5505, -46.6333],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_5dbb8005008f9ac5674e2f536741edf0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_789efc70bb664c9d1fb02f8f651a31ea = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bb07075e70d6800505062e12193cef3e = $(`<div id="html_bb07075e70d6800505062e12193cef3e" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-004</h4>                     <p><b>ID:</b> 31</p>                     <p><b>Ubicación:</b> São Paulo, São Paulo</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -23.5505, -46.6333</p>                 </div>                 </div>`)[0];
+                popup_789efc70bb664c9d1fb02f8f651a31ea.setContent(html_bb07075e70d6800505062e12193cef3e);
+            
+        
+
+        marker_4f372d103b7c5d44f7525935b2d6b4c4.bindPopup(popup_789efc70bb664c9d1fb02f8f651a31ea)
+        ;
+
+        
+    
+    
+            marker_4f372d103b7c5d44f7525935b2d6b4c4.bindTooltip(
+                `<div>
+                     Sensor AQM-004 - São Paulo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4f372d103b7c5d44f7525935b2d6b4c4.setIcon(icon_5dbb8005008f9ac5674e2f536741edf0);
+            
+    
+            marker_cluster_84ef69547fc39e1b4cc0ac4ae439417a.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_7dad19f181ccc7c34df2ed776195122a = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_7dad19f181ccc7c34df2ed776195122a.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_d51a9c68c4cbd414b0a414cb43179d8c = L.marker(
+                [43.6532, -79.3832],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_b987ba0428591a3aaf0bdcecaaffdc0b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_2e7cb64399f606c47cdf005955e3387c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e5a927c7877b3ea02dadd3a0c50d7441 = $(`<div id="html_e5a927c7877b3ea02dadd3a0c50d7441" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-006</h4>                     <p><b>ID:</b> 33</p>                     <p><b>Ubicación:</b> Toronto, Ontario</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 43.6532, -79.3832</p>                 </div>                 </div>`)[0];
+                popup_2e7cb64399f606c47cdf005955e3387c.setContent(html_e5a927c7877b3ea02dadd3a0c50d7441);
+            
+        
+
+        marker_d51a9c68c4cbd414b0a414cb43179d8c.bindPopup(popup_2e7cb64399f606c47cdf005955e3387c)
+        ;
+
+        
+    
+    
+            marker_d51a9c68c4cbd414b0a414cb43179d8c.bindTooltip(
+                `<div>
+                     Sensor AQM-006 - Toronto
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d51a9c68c4cbd414b0a414cb43179d8c.setIcon(icon_b987ba0428591a3aaf0bdcecaaffdc0b);
+            
+    
+            marker_cluster_7dad19f181ccc7c34df2ed776195122a.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_506c2ae8bd518aa5325340a7fa53e158 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_506c2ae8bd518aa5325340a7fa53e158.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_a375b1261582085d9c1078ba04ad2f38 = L.marker(
+                [39.9042, 116.4074],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_98d08ff2316a37aa03135e9f1e7341b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_51cc82f8c5aac03eaa79cee1f608f776 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3677c85fda619d0c6b474c2152d31652 = $(`<div id="html_3677c85fda619d0c6b474c2152d31652" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-013</h4>                     <p><b>ID:</b> 40</p>                     <p><b>Ubicación:</b> Pekín, Pekín</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 39.9042, 116.4074</p>                 </div>                 </div>`)[0];
+                popup_51cc82f8c5aac03eaa79cee1f608f776.setContent(html_3677c85fda619d0c6b474c2152d31652);
+            
+        
+
+        marker_a375b1261582085d9c1078ba04ad2f38.bindPopup(popup_51cc82f8c5aac03eaa79cee1f608f776)
+        ;
+
+        
+    
+    
+            marker_a375b1261582085d9c1078ba04ad2f38.bindTooltip(
+                `<div>
+                     Sensor AQM-013 - Pekín
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a375b1261582085d9c1078ba04ad2f38.setIcon(icon_98d08ff2316a37aa03135e9f1e7341b6);
+            
+    
+            var marker_fba1da958babb21b18858565728e85d8 = L.marker(
+                [31.2304, 121.4737],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_ef553281799c5aeae3e2d028e119c3a3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_215192f30f324a4647b7b72dbdf6b7dc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_faa4f3d922bc48f19e9b0f3c76bcc1f6 = $(`<div id="html_faa4f3d922bc48f19e9b0f3c76bcc1f6" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-014</h4>                     <p><b>ID:</b> 41</p>                     <p><b>Ubicación:</b> Shanghái, Shanghái</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 31.2304, 121.4737</p>                 </div>                 </div>`)[0];
+                popup_215192f30f324a4647b7b72dbdf6b7dc.setContent(html_faa4f3d922bc48f19e9b0f3c76bcc1f6);
+            
+        
+
+        marker_fba1da958babb21b18858565728e85d8.bindPopup(popup_215192f30f324a4647b7b72dbdf6b7dc)
+        ;
+
+        
+    
+    
+            marker_fba1da958babb21b18858565728e85d8.bindTooltip(
+                `<div>
+                     Sensor AQM-014 - Shanghái
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fba1da958babb21b18858565728e85d8.setIcon(icon_ef553281799c5aeae3e2d028e119c3a3);
+            
+    
+            marker_cluster_506c2ae8bd518aa5325340a7fa53e158.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_3370212ef898bab0bd81e75e873a39e0 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_3370212ef898bab0bd81e75e873a39e0.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_3bd8fe3cbedd8689ed0b47503bb13db3 = L.marker(
+                [30.0444, 31.2357],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_ae81bbf1e7297463501097a59c8cd82a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_2572592592e000ab831309a4bb3ced70 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_326b3fae3157fbec9d7841f12a51c8a7 = $(`<div id="html_326b3fae3157fbec9d7841f12a51c8a7" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-019</h4>                     <p><b>ID:</b> 46</p>                     <p><b>Ubicación:</b> El Cairo, El Cairo</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 30.0444, 31.2357</p>                 </div>                 </div>`)[0];
+                popup_2572592592e000ab831309a4bb3ced70.setContent(html_326b3fae3157fbec9d7841f12a51c8a7);
+            
+        
+
+        marker_3bd8fe3cbedd8689ed0b47503bb13db3.bindPopup(popup_2572592592e000ab831309a4bb3ced70)
+        ;
+
+        
+    
+    
+            marker_3bd8fe3cbedd8689ed0b47503bb13db3.bindTooltip(
+                `<div>
+                     Sensor AQM-019 - El Cairo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3bd8fe3cbedd8689ed0b47503bb13db3.setIcon(icon_ae81bbf1e7297463501097a59c8cd82a);
+            
+    
+            var marker_cd2de52616b0ad8dd8581bd0c1dcedd5 = L.marker(
+                [31.2001, 29.9187],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_edc85069bd1c34e016fbe6f94a0f14a9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_0054d4bed75b55858d4b6eb66196b5db = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1ab9af1c35daa4606adc24cdd1973dbe = $(`<div id="html_1ab9af1c35daa4606adc24cdd1973dbe" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-020</h4>                     <p><b>ID:</b> 47</p>                     <p><b>Ubicación:</b> Alejandría, Alejandría</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 31.2001, 29.9187</p>                 </div>                 </div>`)[0];
+                popup_0054d4bed75b55858d4b6eb66196b5db.setContent(html_1ab9af1c35daa4606adc24cdd1973dbe);
+            
+        
+
+        marker_cd2de52616b0ad8dd8581bd0c1dcedd5.bindPopup(popup_0054d4bed75b55858d4b6eb66196b5db)
+        ;
+
+        
+    
+    
+            marker_cd2de52616b0ad8dd8581bd0c1dcedd5.bindTooltip(
+                `<div>
+                     Sensor AQM-020 - Alejandría
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cd2de52616b0ad8dd8581bd0c1dcedd5.setIcon(icon_edc85069bd1c34e016fbe6f94a0f14a9);
+            
+    
+            marker_cluster_3370212ef898bab0bd81e75e873a39e0.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_8d3a57936f94dc816882cc2b282cd790 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_8d3a57936f94dc816882cc2b282cd790.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_77be43982bf9e50b6e46db095988780e = L.marker(
+                [40.4168, -3.7038],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_a5c869676fe92dfaa23ff032211f1dd2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_fa1b362b48c242aef4e2932d266908f8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_adc56999ac8e4ff89e141d36b6d5eaa9 = $(`<div id="html_adc56999ac8e4ff89e141d36b6d5eaa9" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-007</h4>                     <p><b>ID:</b> 34</p>                     <p><b>Ubicación:</b> Madrid, Madrid</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 40.4168, -3.7038</p>                 </div>                 </div>`)[0];
+                popup_fa1b362b48c242aef4e2932d266908f8.setContent(html_adc56999ac8e4ff89e141d36b6d5eaa9);
+            
+        
+
+        marker_77be43982bf9e50b6e46db095988780e.bindPopup(popup_fa1b362b48c242aef4e2932d266908f8)
+        ;
+
+        
+    
+    
+            marker_77be43982bf9e50b6e46db095988780e.bindTooltip(
+                `<div>
+                     Sensor AQM-007 - Madrid
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_77be43982bf9e50b6e46db095988780e.setIcon(icon_a5c869676fe92dfaa23ff032211f1dd2);
+            
+    
+            var marker_3afc3701a65be91a02f1924a13cb350a = L.marker(
+                [41.3851, 2.1734],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_835017d7e501b5747bb1c29d0424dd6f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_99f2423c8985541fd1f266083239b619 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d87037d112ec513d1418ec2416784a3d = $(`<div id="html_d87037d112ec513d1418ec2416784a3d" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-008</h4>                     <p><b>ID:</b> 35</p>                     <p><b>Ubicación:</b> Barcelona, Cataluña</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 41.3851, 2.1734</p>                 </div>                 </div>`)[0];
+                popup_99f2423c8985541fd1f266083239b619.setContent(html_d87037d112ec513d1418ec2416784a3d);
+            
+        
+
+        marker_3afc3701a65be91a02f1924a13cb350a.bindPopup(popup_99f2423c8985541fd1f266083239b619)
+        ;
+
+        
+    
+    
+            marker_3afc3701a65be91a02f1924a13cb350a.bindTooltip(
+                `<div>
+                     Sensor AQM-008 - Barcelona
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3afc3701a65be91a02f1924a13cb350a.setIcon(icon_835017d7e501b5747bb1c29d0424dd6f);
+            
+    
+            marker_cluster_8d3a57936f94dc816882cc2b282cd790.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_d0ebb45c87899413f90cb1073fcd7871 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_d0ebb45c87899413f90cb1073fcd7871.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_f6a194fd42e0a75aa7e2d7f5a4e68286 = L.marker(
+                [34.0522, -118.2437],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_48de668dd5475b27a3e8535bd36dffb1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_92fd42bebebd898267d527bae65013c0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fdc3531ee19ff67a8c27ba83cd762397 = $(`<div id="html_fdc3531ee19ff67a8c27ba83cd762397" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-001</h4>                     <p><b>ID:</b> 28</p>                     <p><b>Ubicación:</b> Los Ángeles, California</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 34.0522, -118.2437</p>                 </div>                 </div>`)[0];
+                popup_92fd42bebebd898267d527bae65013c0.setContent(html_fdc3531ee19ff67a8c27ba83cd762397);
+            
+        
+
+        marker_f6a194fd42e0a75aa7e2d7f5a4e68286.bindPopup(popup_92fd42bebebd898267d527bae65013c0)
+        ;
+
+        
+    
+    
+            marker_f6a194fd42e0a75aa7e2d7f5a4e68286.bindTooltip(
+                `<div>
+                     Sensor AQM-001 - Los Ángeles
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6a194fd42e0a75aa7e2d7f5a4e68286.setIcon(icon_48de668dd5475b27a3e8535bd36dffb1);
+            
+    
+            var marker_2844e37d90b3489452fa2bc3fad1d675 = L.marker(
+                [40.7128, -74.006],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_6c8c7351401ac15578c983bf3ca75181 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_7d92e2eee2831b6547be7da469708bae = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_28fba3e98c3cd58712f9b32ffdc6c1e3 = $(`<div id="html_28fba3e98c3cd58712f9b32ffdc6c1e3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-002</h4>                     <p><b>ID:</b> 29</p>                     <p><b>Ubicación:</b> Nueva York, Nueva York</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 40.7128, -74.006</p>                 </div>                 </div>`)[0];
+                popup_7d92e2eee2831b6547be7da469708bae.setContent(html_28fba3e98c3cd58712f9b32ffdc6c1e3);
+            
+        
+
+        marker_2844e37d90b3489452fa2bc3fad1d675.bindPopup(popup_7d92e2eee2831b6547be7da469708bae)
+        ;
+
+        
+    
+    
+            marker_2844e37d90b3489452fa2bc3fad1d675.bindTooltip(
+                `<div>
+                     Sensor AQM-002 - Nueva York
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2844e37d90b3489452fa2bc3fad1d675.setIcon(icon_6c8c7351401ac15578c983bf3ca75181);
+            
+    
+            marker_cluster_d0ebb45c87899413f90cb1073fcd7871.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_efc902b39fd4fac8ba1d52c502a0c741 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_efc902b39fd4fac8ba1d52c502a0c741.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_67f1260026aba98b50a1b84154881990 = L.marker(
+                [48.8566, 2.3522],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_56dfeeb303818a2528bc16171ce7a773 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_0343bfca2146caacd68abf83d8fdf101 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_872d03a5736703026424f1feea556858 = $(`<div id="html_872d03a5736703026424f1feea556858" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-009</h4>                     <p><b>ID:</b> 36</p>                     <p><b>Ubicación:</b> París, Île-de-France</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 48.8566, 2.3522</p>                 </div>                 </div>`)[0];
+                popup_0343bfca2146caacd68abf83d8fdf101.setContent(html_872d03a5736703026424f1feea556858);
+            
+        
+
+        marker_67f1260026aba98b50a1b84154881990.bindPopup(popup_0343bfca2146caacd68abf83d8fdf101)
+        ;
+
+        
+    
+    
+            marker_67f1260026aba98b50a1b84154881990.bindTooltip(
+                `<div>
+                     Sensor AQM-009 - París
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_67f1260026aba98b50a1b84154881990.setIcon(icon_56dfeeb303818a2528bc16171ce7a773);
+            
+    
+            marker_cluster_efc902b39fd4fac8ba1d52c502a0c741.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_debad1940400fccfbccb423a9b8c328a = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_debad1940400fccfbccb423a9b8c328a.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_2a7fa9125183c451c6310a34d7e32fbe = L.marker(
+                [19.076, 72.8777],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_d4ebae53906fd63638c9f7a53484d8c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_3c00341dd3a7da8fd423df04bfc5dc80 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_07afd5e858927a5feb8182419f4b38f3 = $(`<div id="html_07afd5e858927a5feb8182419f4b38f3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-017</h4>                     <p><b>ID:</b> 44</p>                     <p><b>Ubicación:</b> Mumbai, Maharashtra</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 19.076, 72.8777</p>                 </div>                 </div>`)[0];
+                popup_3c00341dd3a7da8fd423df04bfc5dc80.setContent(html_07afd5e858927a5feb8182419f4b38f3);
+            
+        
+
+        marker_2a7fa9125183c451c6310a34d7e32fbe.bindPopup(popup_3c00341dd3a7da8fd423df04bfc5dc80)
+        ;
+
+        
+    
+    
+            marker_2a7fa9125183c451c6310a34d7e32fbe.bindTooltip(
+                `<div>
+                     Sensor AQM-017 - Mumbai
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2a7fa9125183c451c6310a34d7e32fbe.setIcon(icon_d4ebae53906fd63638c9f7a53484d8c4);
+            
+    
+            var marker_6bba5836a17b1fc4362cf238088bcf6a = L.marker(
+                [28.6139, 77.209],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_bc7a24ca4685b4e244d34829e024f561 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_9b58efe683341bd30f04de2942cc0cb4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9d1cf9da9e1da92604df615288cb5796 = $(`<div id="html_9d1cf9da9e1da92604df615288cb5796" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-018</h4>                     <p><b>ID:</b> 45</p>                     <p><b>Ubicación:</b> Nueva Delhi, Delhi</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 28.6139, 77.209</p>                 </div>                 </div>`)[0];
+                popup_9b58efe683341bd30f04de2942cc0cb4.setContent(html_9d1cf9da9e1da92604df615288cb5796);
+            
+        
+
+        marker_6bba5836a17b1fc4362cf238088bcf6a.bindPopup(popup_9b58efe683341bd30f04de2942cc0cb4)
+        ;
+
+        
+    
+    
+            marker_6bba5836a17b1fc4362cf238088bcf6a.bindTooltip(
+                `<div>
+                     Sensor AQM-018 - Nueva Delhi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6bba5836a17b1fc4362cf238088bcf6a.setIcon(icon_bc7a24ca4685b4e244d34829e024f561);
+            
+    
+            marker_cluster_debad1940400fccfbccb423a9b8c328a.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_ff410cc59c46f6ee6feee1767534bae1 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_ff410cc59c46f6ee6feee1767534bae1.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_75c6187fe7b3daadb9aecc17bf54bbcd = L.marker(
+                [41.9028, 12.4964],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_3be88dce9f6c3c39da0add295f730172 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_a22d529b7ddec0c970745e1cacb5febe = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ac32a6a11bf376f212ee57638d5ed4a8 = $(`<div id="html_ac32a6a11bf376f212ee57638d5ed4a8" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-012</h4>                     <p><b>ID:</b> 39</p>                     <p><b>Ubicación:</b> Roma, Lacio</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 41.9028, 12.4964</p>                 </div>                 </div>`)[0];
+                popup_a22d529b7ddec0c970745e1cacb5febe.setContent(html_ac32a6a11bf376f212ee57638d5ed4a8);
+            
+        
+
+        marker_75c6187fe7b3daadb9aecc17bf54bbcd.bindPopup(popup_a22d529b7ddec0c970745e1cacb5febe)
+        ;
+
+        
+    
+    
+            marker_75c6187fe7b3daadb9aecc17bf54bbcd.bindTooltip(
+                `<div>
+                     Sensor AQM-012 - Roma
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_75c6187fe7b3daadb9aecc17bf54bbcd.setIcon(icon_3be88dce9f6c3c39da0add295f730172);
+            
+    
+            marker_cluster_ff410cc59c46f6ee6feee1767534bae1.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_332097f6dc40b8ebb3a50ceecfd06fce = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_332097f6dc40b8ebb3a50ceecfd06fce.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_ed0019cf6c9d68b1bae08c2ef691efcf = L.marker(
+                [35.6895, 139.6917],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_6df42610b29c737a8ae6293b41a1fe10 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_69aa9ccc11db51278b88fa28cae614b7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3a13ccd5aee9979d0a5c4720e42ed0dc = $(`<div id="html_3a13ccd5aee9979d0a5c4720e42ed0dc" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-015</h4>                     <p><b>ID:</b> 42</p>                     <p><b>Ubicación:</b> Tokio, Kanto</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 35.6895, 139.6917</p>                 </div>                 </div>`)[0];
+                popup_69aa9ccc11db51278b88fa28cae614b7.setContent(html_3a13ccd5aee9979d0a5c4720e42ed0dc);
+            
+        
+
+        marker_ed0019cf6c9d68b1bae08c2ef691efcf.bindPopup(popup_69aa9ccc11db51278b88fa28cae614b7)
+        ;
+
+        
+    
+    
+            marker_ed0019cf6c9d68b1bae08c2ef691efcf.bindTooltip(
+                `<div>
+                     Sensor AQM-015 - Tokio
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ed0019cf6c9d68b1bae08c2ef691efcf.setIcon(icon_6df42610b29c737a8ae6293b41a1fe10);
+            
+    
+            var marker_e24fad6d0854f10b321927b7c70d6998 = L.marker(
+                [34.6937, 135.5022],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_1ba9c0e6af838a340587cfc332f1a853 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_8478125af2908ae883e3ec4f1b19b3ad = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cbe22ef889cb1ba20d18472434037898 = $(`<div id="html_cbe22ef889cb1ba20d18472434037898" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-016</h4>                     <p><b>ID:</b> 43</p>                     <p><b>Ubicación:</b> Osaka, Kansai</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 34.6937, 135.5022</p>                 </div>                 </div>`)[0];
+                popup_8478125af2908ae883e3ec4f1b19b3ad.setContent(html_cbe22ef889cb1ba20d18472434037898);
+            
+        
+
+        marker_e24fad6d0854f10b321927b7c70d6998.bindPopup(popup_8478125af2908ae883e3ec4f1b19b3ad)
+        ;
+
+        
+    
+    
+            marker_e24fad6d0854f10b321927b7c70d6998.bindTooltip(
+                `<div>
+                     Sensor AQM-016 - Osaka
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e24fad6d0854f10b321927b7c70d6998.setIcon(icon_1ba9c0e6af838a340587cfc332f1a853);
+            
+    
+            marker_cluster_332097f6dc40b8ebb3a50ceecfd06fce.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_f1b76b2ea5028e38df309e72bcec2597 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_f1b76b2ea5028e38df309e72bcec2597.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_3910864057d15ba9c5f5cbfe7d8ab5de = L.marker(
+                [-1.2921, 36.8219],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_8a0e345b0163156c6cb7904d97b23e23 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_3f026ab908f88186a1889fdd744c3e33 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d31356fee34dfcba6fd4620e03df1fd0 = $(`<div id="html_d31356fee34dfcba6fd4620e03df1fd0" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-024</h4>                     <p><b>ID:</b> 51</p>                     <p><b>Ubicación:</b> Nairobi, Nairobi</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -1.2921, 36.8219</p>                 </div>                 </div>`)[0];
+                popup_3f026ab908f88186a1889fdd744c3e33.setContent(html_d31356fee34dfcba6fd4620e03df1fd0);
+            
+        
+
+        marker_3910864057d15ba9c5f5cbfe7d8ab5de.bindPopup(popup_3f026ab908f88186a1889fdd744c3e33)
+        ;
+
+        
+    
+    
+            marker_3910864057d15ba9c5f5cbfe7d8ab5de.bindTooltip(
+                `<div>
+                     Sensor AQM-024 - Nairobi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3910864057d15ba9c5f5cbfe7d8ab5de.setIcon(icon_8a0e345b0163156c6cb7904d97b23e23);
+            
+    
+            marker_cluster_f1b76b2ea5028e38df309e72bcec2597.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_f8dc4a51338df34535c757987800e6bc = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_f8dc4a51338df34535c757987800e6bc.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_e10573e792d1fd816377e3fd95127263 = L.marker(
+                [19.4326, -99.1332],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_6da2beb1c7daaa29bae9da3e2262fb89 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_c5600c01f08e21e5ca26144d2ecc2100 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b3694d0d47e25bf4e8c9c0fa3cd41bd6 = $(`<div id="html_b3694d0d47e25bf4e8c9c0fa3cd41bd6" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-003</h4>                     <p><b>ID:</b> 30</p>                     <p><b>Ubicación:</b> Ciudad de México, Ciudad de México</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 19.4326, -99.1332</p>                 </div>                 </div>`)[0];
+                popup_c5600c01f08e21e5ca26144d2ecc2100.setContent(html_b3694d0d47e25bf4e8c9c0fa3cd41bd6);
+            
+        
+
+        marker_e10573e792d1fd816377e3fd95127263.bindPopup(popup_c5600c01f08e21e5ca26144d2ecc2100)
+        ;
+
+        
+    
+    
+            marker_e10573e792d1fd816377e3fd95127263.bindTooltip(
+                `<div>
+                     Sensor AQM-003 - Ciudad de México
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e10573e792d1fd816377e3fd95127263.setIcon(icon_6da2beb1c7daaa29bae9da3e2262fb89);
+            
+    
+            marker_cluster_f8dc4a51338df34535c757987800e6bc.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_f082efef628ad11adcf4a8d10a4c071f = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_f082efef628ad11adcf4a8d10a4c071f.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_9deda73e94dd66af8914fa333dca8a36 = L.marker(
+                [6.5244, 3.3792],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_35626a8a68f218b3117d324bdb7a4cf8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_10e048eafdee7308ab5c1dd5a085e60c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3e6cb19cf7adea598d5371f4bb9932db = $(`<div id="html_3e6cb19cf7adea598d5371f4bb9932db" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-023</h4>                     <p><b>ID:</b> 50</p>                     <p><b>Ubicación:</b> Lagos, Lagos</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 6.5244, 3.3792</p>                 </div>                 </div>`)[0];
+                popup_10e048eafdee7308ab5c1dd5a085e60c.setContent(html_3e6cb19cf7adea598d5371f4bb9932db);
+            
+        
+
+        marker_9deda73e94dd66af8914fa333dca8a36.bindPopup(popup_10e048eafdee7308ab5c1dd5a085e60c)
+        ;
+
+        
+    
+    
+            marker_9deda73e94dd66af8914fa333dca8a36.bindTooltip(
+                `<div>
+                     Sensor AQM-023 - Lagos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9deda73e94dd66af8914fa333dca8a36.setIcon(icon_35626a8a68f218b3117d324bdb7a4cf8);
+            
+    
+            marker_cluster_f082efef628ad11adcf4a8d10a4c071f.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_57f5483050bd680a2be240e24f866e57 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_57f5483050bd680a2be240e24f866e57.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_b5c68aeb676aa6124cc2115d13610945 = L.marker(
+                [-36.8485, 174.7633],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_39332d5e6fab1bc85d5cd8af65f058dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_2738162ec20961b6600e1fe627d67ca6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_49cbedc2a31ed8004c00478269a3369b = $(`<div id="html_49cbedc2a31ed8004c00478269a3369b" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-027</h4>                     <p><b>ID:</b> 54</p>                     <p><b>Ubicación:</b> Auckland, Auckland</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -36.8485, 174.7633</p>                 </div>                 </div>`)[0];
+                popup_2738162ec20961b6600e1fe627d67ca6.setContent(html_49cbedc2a31ed8004c00478269a3369b);
+            
+        
+
+        marker_b5c68aeb676aa6124cc2115d13610945.bindPopup(popup_2738162ec20961b6600e1fe627d67ca6)
+        ;
+
+        
+    
+    
+            marker_b5c68aeb676aa6124cc2115d13610945.bindTooltip(
+                `<div>
+                     Sensor AQM-027 - Auckland
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b5c68aeb676aa6124cc2115d13610945.setIcon(icon_39332d5e6fab1bc85d5cd8af65f058dc);
+            
+    
+            var marker_522fdc2636aa6031809b360017d4fed9 = L.marker(
+                [-41.2865, 174.7762],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_f01b695e075cb70e2a7079cf0c3016cf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_b022d9c8fcebbd365dca991e6cd9ad7f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5c477a3d2a909f4b41fe910acb888cc4 = $(`<div id="html_5c477a3d2a909f4b41fe910acb888cc4" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-028</h4>                     <p><b>ID:</b> 55</p>                     <p><b>Ubicación:</b> Wellington, Wellington</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -41.2865, 174.7762</p>                 </div>                 </div>`)[0];
+                popup_b022d9c8fcebbd365dca991e6cd9ad7f.setContent(html_5c477a3d2a909f4b41fe910acb888cc4);
+            
+        
+
+        marker_522fdc2636aa6031809b360017d4fed9.bindPopup(popup_b022d9c8fcebbd365dca991e6cd9ad7f)
+        ;
+
+        
+    
+    
+            marker_522fdc2636aa6031809b360017d4fed9.bindTooltip(
+                `<div>
+                     Sensor AQM-028 - Wellington
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_522fdc2636aa6031809b360017d4fed9.setIcon(icon_f01b695e075cb70e2a7079cf0c3016cf);
+            
+    
+            marker_cluster_57f5483050bd680a2be240e24f866e57.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_37e2d983045ed27731b79e58f5fe449a = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_37e2d983045ed27731b79e58f5fe449a.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_83c00bee05075209bd705ac026229f0d = L.marker(
+                [51.5074, -0.1276],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_09c0a6376bdbcbc12c65baaf2f4774c3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_3479e9a10e65b55ad6f4501b34e710da = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1507b67854558f04a55551a53ac3fb02 = $(`<div id="html_1507b67854558f04a55551a53ac3fb02" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-011</h4>                     <p><b>ID:</b> 38</p>                     <p><b>Ubicación:</b> Londres, Inglaterra</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> 51.5074, -0.1276</p>                 </div>                 </div>`)[0];
+                popup_3479e9a10e65b55ad6f4501b34e710da.setContent(html_1507b67854558f04a55551a53ac3fb02);
+            
+        
+
+        marker_83c00bee05075209bd705ac026229f0d.bindPopup(popup_3479e9a10e65b55ad6f4501b34e710da)
+        ;
+
+        
+    
+    
+            marker_83c00bee05075209bd705ac026229f0d.bindTooltip(
+                `<div>
+                     Sensor AQM-011 - Londres
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_83c00bee05075209bd705ac026229f0d.setIcon(icon_09c0a6376bdbcbc12c65baaf2f4774c3);
+            
+    
+            marker_cluster_37e2d983045ed27731b79e58f5fe449a.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var marker_cluster_83cf7ec88d91a7f8efea755fd79c1158 = L.markerClusterGroup(
+                {
+}
+            );
+            marker_cluster_83cf7ec88d91a7f8efea755fd79c1158.options.iconCreateFunction =
+                function(cluster) {
+            return L.divIcon({
+                html: '<div style="background-color: rgba(77, 145, 255, 0.6); border-radius: 50%; color: white; text-align: center; font-weight: bold;">' + cluster.getChildCount() + '</div>',
+                className: 'marker-cluster',
+                iconSize: L.point(40, 40)
+            });
+        };
+        
+    
+            var marker_6f957399b01f612b409ae88a9b487392 = L.marker(
+                [-26.2041, 28.0473],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_f4f7c929461a9c67cc8aa8feae67149f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_ad7e1df77b4ee1beba237fbb5a08f83f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f918a235e6f3a657b8df745a910070a2 = $(`<div id="html_f918a235e6f3a657b8df745a910070a2" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-021</h4>                     <p><b>ID:</b> 48</p>                     <p><b>Ubicación:</b> Johannesburgo, Gauteng</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -26.2041, 28.0473</p>                 </div>                 </div>`)[0];
+                popup_ad7e1df77b4ee1beba237fbb5a08f83f.setContent(html_f918a235e6f3a657b8df745a910070a2);
+            
+        
+
+        marker_6f957399b01f612b409ae88a9b487392.bindPopup(popup_ad7e1df77b4ee1beba237fbb5a08f83f)
+        ;
+
+        
+    
+    
+            marker_6f957399b01f612b409ae88a9b487392.bindTooltip(
+                `<div>
+                     Sensor AQM-021 - Johannesburgo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6f957399b01f612b409ae88a9b487392.setIcon(icon_f4f7c929461a9c67cc8aa8feae67149f);
+            
+    
+            var marker_53a79102d72ea1f42c346b365b36506a = L.marker(
+                [-33.9249, 18.4241],
+                {
+}
+            ).addTo(feature_group_505964982755adc0bcdb6f6478cdcb09);
+        
+    
+            var icon_b175cfa1f2ca619bc635f866e2f1b3f8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-circle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+  "iconSize": [24, 24],
+  "iconAnchor": [12, 12],
+}
+            );
+        
+    
+        var popup_82ea023cbc1cfa3e9dc54f9fddc55d0a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_efcfe90472b41e1777f6f7f11e7cc2cb = $(`<div id="html_efcfe90472b41e1777f6f7f11e7cc2cb" style="width: 100.0%; height: 100.0%;">                 <div style="width: 250px; font-family: Arial, sans-serif;">                     <h4 style="margin: 5px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">Sensor AQM-022</h4>                     <p><b>ID:</b> 49</p>                     <p><b>Ubicación:</b> Ciudad del Cabo, Western Cape</p>                     <p><b>Última calibración:</b> 2025-03-24</p>                     <p><b>Estado:</b> <span style="color: #2ecc71">                         ✅ Reciente                     </span></p>                     <p><b>Coordenadas:</b> -33.9249, 18.4241</p>                 </div>                 </div>`)[0];
+                popup_82ea023cbc1cfa3e9dc54f9fddc55d0a.setContent(html_efcfe90472b41e1777f6f7f11e7cc2cb);
+            
+        
+
+        marker_53a79102d72ea1f42c346b365b36506a.bindPopup(popup_82ea023cbc1cfa3e9dc54f9fddc55d0a)
+        ;
+
+        
+    
+    
+            marker_53a79102d72ea1f42c346b365b36506a.bindTooltip(
+                `<div>
+                     Sensor AQM-022 - Ciudad del Cabo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53a79102d72ea1f42c346b365b36506a.setIcon(icon_b175cfa1f2ca619bc635f866e2f1b3f8);
+            
+    
+            marker_cluster_83cf7ec88d91a7f8efea755fd79c1158.addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var feature_group_505964982755adc0bcdb6f6478cdcb09 = L.featureGroup(
+                {
+}
+            );
+        
+    
+                marker_979394c48626df10dc814156edf50019.setIcon(icon_d5a19f1fb7d1f7a22f7a82c30e1bd90c);
+            
+    
+                marker_98718cf2b11b823def9ad46ee7b75d29.setIcon(icon_1fb945d52082881e9eb7f454b91a5d4d);
+            
+    
+                marker_b257abf9a119ce022eb737cf4a6ef264.setIcon(icon_9f3ec2b13c304bf23a37b7f9875338de);
+            
+    
+                marker_c6739b4bd21e987a1d0537509c6c74b0.setIcon(icon_af3d881db5e4eb34521e36c71a9d1196);
+            
+    
+                marker_4f372d103b7c5d44f7525935b2d6b4c4.setIcon(icon_5dbb8005008f9ac5674e2f536741edf0);
+            
+    
+                marker_d51a9c68c4cbd414b0a414cb43179d8c.setIcon(icon_b987ba0428591a3aaf0bdcecaaffdc0b);
+            
+    
+                marker_a375b1261582085d9c1078ba04ad2f38.setIcon(icon_98d08ff2316a37aa03135e9f1e7341b6);
+            
+    
+                marker_fba1da958babb21b18858565728e85d8.setIcon(icon_ef553281799c5aeae3e2d028e119c3a3);
+            
+    
+                marker_3bd8fe3cbedd8689ed0b47503bb13db3.setIcon(icon_ae81bbf1e7297463501097a59c8cd82a);
+            
+    
+                marker_cd2de52616b0ad8dd8581bd0c1dcedd5.setIcon(icon_edc85069bd1c34e016fbe6f94a0f14a9);
+            
+    
+                marker_77be43982bf9e50b6e46db095988780e.setIcon(icon_a5c869676fe92dfaa23ff032211f1dd2);
+            
+    
+                marker_3afc3701a65be91a02f1924a13cb350a.setIcon(icon_835017d7e501b5747bb1c29d0424dd6f);
+            
+    
+                marker_f6a194fd42e0a75aa7e2d7f5a4e68286.setIcon(icon_48de668dd5475b27a3e8535bd36dffb1);
+            
+    
+                marker_2844e37d90b3489452fa2bc3fad1d675.setIcon(icon_6c8c7351401ac15578c983bf3ca75181);
+            
+    
+                marker_67f1260026aba98b50a1b84154881990.setIcon(icon_56dfeeb303818a2528bc16171ce7a773);
+            
+    
+                marker_2a7fa9125183c451c6310a34d7e32fbe.setIcon(icon_d4ebae53906fd63638c9f7a53484d8c4);
+            
+    
+                marker_6bba5836a17b1fc4362cf238088bcf6a.setIcon(icon_bc7a24ca4685b4e244d34829e024f561);
+            
+    
+                marker_75c6187fe7b3daadb9aecc17bf54bbcd.setIcon(icon_3be88dce9f6c3c39da0add295f730172);
+            
+    
+                marker_ed0019cf6c9d68b1bae08c2ef691efcf.setIcon(icon_6df42610b29c737a8ae6293b41a1fe10);
+            
+    
+                marker_e24fad6d0854f10b321927b7c70d6998.setIcon(icon_1ba9c0e6af838a340587cfc332f1a853);
+            
+    
+                marker_3910864057d15ba9c5f5cbfe7d8ab5de.setIcon(icon_8a0e345b0163156c6cb7904d97b23e23);
+            
+    
+                marker_e10573e792d1fd816377e3fd95127263.setIcon(icon_6da2beb1c7daaa29bae9da3e2262fb89);
+            
+    
+                marker_9deda73e94dd66af8914fa333dca8a36.setIcon(icon_35626a8a68f218b3117d324bdb7a4cf8);
+            
+    
+                marker_b5c68aeb676aa6124cc2115d13610945.setIcon(icon_39332d5e6fab1bc85d5cd8af65f058dc);
+            
+    
+                marker_522fdc2636aa6031809b360017d4fed9.setIcon(icon_f01b695e075cb70e2a7079cf0c3016cf);
+            
+    
+                marker_83c00bee05075209bd705ac026229f0d.setIcon(icon_09c0a6376bdbcbc12c65baaf2f4774c3);
+            
+    
+                marker_6f957399b01f612b409ae88a9b487392.setIcon(icon_f4f7c929461a9c67cc8aa8feae67149f);
+            
+    
+                marker_53a79102d72ea1f42c346b365b36506a.setIcon(icon_b175cfa1f2ca619bc635f866e2f1b3f8);
+            
+    
+            var feature_group_505964982755adc0bcdb6f6478cdcb09searchControl = new L.Control.Search({
+                layer: feature_group_505964982755adc0bcdb6f6478cdcb09,
+                
+                propertyName: 'nombre_sensor',
+                
+                collapsed: true,
+                textPlaceholder: 'Buscar sensor...',
+                position:'topleft',
+            
+                initial: false,
+                
+                hideMarkerOnCollapse: true
+            
+                });
+                feature_group_505964982755adc0bcdb6f6478cdcb09searchControl.on('search:locationfound', function(e) {
+                    feature_group_505964982755adc0bcdb6f6478cdcb09.setStyle(function(feature){
+                        return feature.properties.style
+                    })
+                    
+                    e.layer.setStyle({
+  "zoom": 15,
+  "marker": circle_marker_bd3dad12d3cdd97c6872cd5011301ede,
+});
+                    
+                    if(e.layer._popup)
+                        e.layer.openPopup();
+                })
+                feature_group_505964982755adc0bcdb6f6478cdcb09searchControl.on('search:collapsed', function(e) {
+                        feature_group_505964982755adc0bcdb6f6478cdcb09.setStyle(function(feature){
+                            return feature.properties.style
+                    });
+                });
+            map_95b915921d027e4bff260938feda11af.addControl( feature_group_505964982755adc0bcdb6f6478cdcb09searchControl );
+
+        
+    
+            var layer_control_243a86c8fddda44544203b907d8613d7_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_27ddba1100b838201f7e4b2fbc72de76,
+                },
+                overlays :  {
+                    "\ud83c\uddfa\ud83c\uddf3 Alemania (1 sensores)" : marker_cluster_edbc8c7a1030d4472e802f26317377da,
+                    "\ud83c\uddfa\ud83c\uddf3 Argentina (1 sensores)" : marker_cluster_189a178be8c0baea0a478c2cd59bceb3,
+                    "\ud83c\uddfa\ud83c\uddf3 Australia (2 sensores)" : marker_cluster_9ee6a21c6e186e3d0c1a7512048bfe5c,
+                    "\ud83c\uddfa\ud83c\uddf3 Brasil (1 sensores)" : marker_cluster_84ef69547fc39e1b4cc0ac4ae439417a,
+                    "\ud83c\uddfa\ud83c\uddf3 Canad\u00e1 (1 sensores)" : marker_cluster_7dad19f181ccc7c34df2ed776195122a,
+                    "\ud83c\uddfa\ud83c\uddf3 China (2 sensores)" : marker_cluster_506c2ae8bd518aa5325340a7fa53e158,
+                    "\ud83c\uddfa\ud83c\uddf3 Egipto (2 sensores)" : marker_cluster_3370212ef898bab0bd81e75e873a39e0,
+                    "\ud83c\uddfa\ud83c\uddf3 Espa\u00f1a (2 sensores)" : marker_cluster_8d3a57936f94dc816882cc2b282cd790,
+                    "\ud83c\uddfa\ud83c\uddf3 Estados Unidos (2 sensores)" : marker_cluster_d0ebb45c87899413f90cb1073fcd7871,
+                    "\ud83c\uddfa\ud83c\uddf3 Francia (1 sensores)" : marker_cluster_efc902b39fd4fac8ba1d52c502a0c741,
+                    "\ud83c\uddfa\ud83c\uddf3 India (2 sensores)" : marker_cluster_debad1940400fccfbccb423a9b8c328a,
+                    "\ud83c\uddfa\ud83c\uddf3 Italia (1 sensores)" : marker_cluster_ff410cc59c46f6ee6feee1767534bae1,
+                    "\ud83c\uddfa\ud83c\uddf3 Jap\u00f3n (2 sensores)" : marker_cluster_332097f6dc40b8ebb3a50ceecfd06fce,
+                    "\ud83c\uddfa\ud83c\uddf3 Kenia (1 sensores)" : marker_cluster_f1b76b2ea5028e38df309e72bcec2597,
+                    "\ud83c\uddfa\ud83c\uddf3 M\u00e9xico (1 sensores)" : marker_cluster_f8dc4a51338df34535c757987800e6bc,
+                    "\ud83c\uddfa\ud83c\uddf3 Nigeria (1 sensores)" : marker_cluster_f082efef628ad11adcf4a8d10a4c071f,
+                    "\ud83c\uddfa\ud83c\uddf3 Nueva Zelanda (2 sensores)" : marker_cluster_57f5483050bd680a2be240e24f866e57,
+                    "\ud83c\uddfa\ud83c\uddf3 Reino Unido (1 sensores)" : marker_cluster_37e2d983045ed27731b79e58f5fe449a,
+                    "\ud83c\uddfa\ud83c\uddf3 Sud\u00e1frica (2 sensores)" : marker_cluster_83cf7ec88d91a7f8efea755fd79c1158,
+                    "Todos los sensores" : feature_group_505964982755adc0bcdb6f6478cdcb09,
+                },
+            };
+            let layer_control_243a86c8fddda44544203b907d8613d7 = L.control.layers(
+                layer_control_243a86c8fddda44544203b907d8613d7_layers.base_layers,
+                layer_control_243a86c8fddda44544203b907d8613d7_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_95b915921d027e4bff260938feda11af);
+
+        
+    
+            var tile_layer_d783300d28c57e8303ceb1a1f21fde73 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detect_retina": false, "max_native_zoom": 20, "max_zoom": 20, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+            );
+            var mini_map_7154c3804aefd6f10714a35158b4f3fb = new L.Control.MiniMap(
+                tile_layer_d783300d28c57e8303ceb1a1f21fde73,
+                {
+  "position": "bottomleft",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": false,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_95b915921d027e4bff260938feda11af.addControl(mini_map_7154c3804aefd6f10714a35158b4f3fb);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topright",
+  "title": "Pantalla completa",
+  "titleCancel": "Salir de pantalla completa",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_95b915921d027e4bff260938feda11af);
+        
+    
+            var locate_control_9fc84334f095fb3a45abfb594a736823 = L.control.locate(
+                {"drawCircle": false, "flyTo": true, "keepCurrentZoomLevel": false, "locateOptions": {"enableHighAccuracy": true}, "position": "topright"}
+            ).addTo(map_95b915921d027e4bff260938feda11af);
+            
+        
+    
+            var measure_control_9b3e3d84eb7d9f1f75f1d8d3a85537a8 = new L.Control.Measure(
+                {
+  "position": "bottomright",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "kilometers",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "hectares",
+});
+            map_95b915921d027e4bff260938feda11af.addControl(measure_control_9b3e3d84eb7d9f1f75f1d8d3a85537a8);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+</script>
+</html>

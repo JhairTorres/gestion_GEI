@@ -12,7 +12,7 @@ async function login() {
         const response = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
+            credentials: 'include', // Importante para que las cookies se incluyan
             body: JSON.stringify({ correo: email, clave: password })
         });
         
@@ -22,8 +22,7 @@ async function login() {
             errorMsg.textContent = data.message || 'Error en la autenticación';
             return;
         }
-        
-        localStorage.setItem('token', data.token);
+
         localStorage.setItem('rol', data.rol);
         
         switch (data.rol) {
@@ -37,10 +36,10 @@ async function login() {
                 window.location.href = '../auditor_dash/auditor_dashboard.html';
                 break;
             default:
-                errorMsg.textContent = 'Rol no reconocido'+ data.rol;
+                errorMsg.textContent = 'Rol no reconocido: ' + data.rol;
         }
     } catch (error) {
-        errorMsg.textContent = 'Error.'+ error;
-        console.log('Error:', error);
+        errorMsg.textContent = 'Error en la conexión: ' + error.message;
+        console.error('Error:', error);
     }
 }

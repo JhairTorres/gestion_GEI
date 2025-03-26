@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Ubicaciones</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="ubicaciones.js"></script>
-
+    <script src="ubicaciones.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -20,26 +19,41 @@
         <!-- 🔹 Buscar Ubicación por ID -->
         <div class="section">
             <h3>Buscar Ubicación</h3>
-            <input type="number" id="searchId" placeholder="ID Ubicación">
+            <input type="number" id="searchId" placeholder="ID Ubicación" oninput="validarNumero(this)">
+            <p class="error-message" id="error-searchId"></p>
             <button onclick="searchUbicacion()">Buscar</button>
         </div>
 
         <!-- 🔹 Agregar Nueva Ubicación -->
         <div class="section">
             <h3>Agregar Nueva Ubicación</h3>
-            <input type="text" id="pais" placeholder="País">
-            <input type="text" id="region" placeholder="Región">
-            <input type="text" id="ciudad" placeholder="Ciudad">
+            <input type="text" id="pais" placeholder="País" oninput="validarTexto(this, 'error-pais')">
+            <p class="error-message" id="error-pais"></p>
+            
+            <input type="text" id="region" placeholder="Región" oninput="validarTexto(this, 'error-region')">
+            <p class="error-message" id="error-region"></p>
+            
+            <input type="text" id="ciudad" placeholder="Ciudad" oninput="validarTexto(this, 'error-ciudad')">
+            <p class="error-message" id="error-ciudad"></p>
+            
             <button onclick="saveUbicacion()">Agregar</button>
         </div>
 
         <!-- 🔹 Actualizar Ubicación por ID -->
         <div class="section">
             <h3>Actualizar Ubicación</h3>
-            <input type="number" id="updateId" placeholder="ID Ubicación">
-            <input type="text" id="updatePais" placeholder="Nuevo País">
-            <input type="text" id="updateRegion" placeholder="Nueva Región">
-            <input type="text" id="updateCiudad" placeholder="Nueva Ciudad">
+            <input type="number" id="updateId" placeholder="ID Ubicación" oninput="validarNumero(this)">
+            <p class="error-message" id="error-updateId"></p>
+            
+            <input type="text" id="updatePais" placeholder="Nuevo País" oninput="validarTexto(this, 'error-updatePais')">
+            <p class="error-message" id="error-updatePais"></p>
+            
+            <input type="text" id="updateRegion" placeholder="Nueva Región" oninput="validarTexto(this, 'error-updateRegion')">
+            <p class="error-message" id="error-updateRegion"></p>
+            
+            <input type="text" id="updateCiudad" placeholder="Nueva Ciudad" oninput="validarTexto(this, 'error-updateCiudad')">
+            <p class="error-message" id="error-updateCiudad"></p>
+            
             <button onclick="updateUbicacion()">Actualizar</button>
         </div>
 
@@ -59,3 +73,4 @@
     </div>
 </body>
 </html>
+

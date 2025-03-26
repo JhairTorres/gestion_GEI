@@ -35,6 +35,11 @@ h2 {
     margin-bottom: 20px;
     color: #3E2723;
 }
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
 
 /* Inputs y botones */
 input, select, button {

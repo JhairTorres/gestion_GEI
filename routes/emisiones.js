@@ -6,70 +6,87 @@ const router = express.Router();
 
 // Obtener todas las emisiones (Protegido)
 router.get('/', verifyToken, (req, res) => {
-    db.query('SELECT id, fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo FROM emisiones', (err, results) => {
+    db.query('CALL listar_emisiones(?)', [req.user.id], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.json(results);
+        res.json(results[0]); // Los resultados están en el primer array
     });
 });
 
 // Obtener una emisión por ID (Protegido)
 router.get('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('SELECT id, fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo FROM emisiones WHERE id = ?', [id], (err, results) => {
+    db.query('CALL buscar_emision(?, ?)', [req.user.id, id], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (results.length === 0) return res.status(404).json({ message: 'Emisión no encontrada' });
-        res.json(results[0]);
+        if (results[0].length === 0) return res.status(404).json({ message: 'Emisión no encontrada' });
+        res.json(results[0][0]);
     });
 });
 
+// Crear nueva emisión (Protegido)
 router.post('/', verifyToken, (req, res) => {
     const { fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo } = req.body;
-
-    if (!fuente_id || !gas_id || !ubicacion_id || !cantidad_emision || !periodo) {
-        return res.status(400).json({ message: 'Todos los campos son obligatorios' });
-    }
-
-    db.query(
-        'INSERT INTO emisiones (fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo) VALUES (?, ?, ?, ?, ?)',
-        [fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo],
-        (err, result) => {
+    
+    db.query('CALL insertar_emision(?, ?, ?, ?, ?, ?)', 
+        [req.user.id, fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo],
+        (err, results) => {
             if (err) {
-                console.error('Error en la consulta SQL:', err); // 🔍 Esto imprime el error exacto en la terminal
-                return res.status(500).json({ error: err.message });
+                console.error('Error en la consulta SQL:', err);
+                return res.status(500).json({ 
+                    error: err.sqlMessage || 'Error al crear la emisión',
+                    details: process.env.NODE_ENV === 'development' ? err.message : undefined
+                });
             }
-            res.status(201).json({ message: 'Emisión agregada correctamente', id: result.insertId });
+            res.status(201).json({ 
+                message: 'Emisión creada correctamente', 
+                id: results[0][0].nuevo_id 
+            });
         }
     );
 });
 
-
-// Actualizar una emisión por ID (Protegido)
+// Actualizar emisión (Protegido)
 router.put('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
     const { fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo } = req.body;
-
-    if (!fuente_id || !cantidad_emision || !periodo) {
-        return res.status(400).json({ message: 'Fuente, cantidad de emisión y periodo son obligatorios' });
-    }
-
-    db.query(
-        'UPDATE emisiones SET fuente_id = ?, gas_id = ?, ubicacion_id = ?, cantidad_emision = ?, periodo = ? WHERE id = ?',
-        [fuente_id, gas_id || null, ubicacion_id || null, cantidad_emision, periodo, id],
-        (err, result) => {
-            if (err) return res.status(500).json({ error: err.message });
-            if (result.affectedRows === 0) return res.status(404).json({ message: 'Emisión no encontrada' });
+    
+    db.query('CALL actualizar_emision(?, ?, ?, ?, ?, ?, ?)', 
+        [req.user.id, id, fuente_id, gas_id, ubicacion_id, cantidad_emision, periodo],
+        (err, results) => {
+            if (err) {
+                console.error('Error en la consulta SQL:', err);
+                return res.status(500).json({ 
+                    error: err.sqlMessage || 'Error al actualizar la emisión',
+                    details: process.env.NODE_ENV === 'development' ? err.message : undefined
+                });
+            }
+            
+            if (results[0][0].filas_afectadas === 0) {
+                return res.status(404).json({ message: 'Emisión no encontrada o sin cambios' });
+            }
+            
             res.json({ message: 'Emisión actualizada correctamente' });
         }
     );
 });
 
-// Eliminar una emisión por ID (Protegido)
+// Eliminar emisión (Protegido) - Ahora es eliminación lógica
 router.delete('/:id', verifyToken, (req, res) => {
     const { id } = req.params;
-    db.query('DELETE FROM emisiones WHERE id = ?', [id], (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        if (result.affectedRows === 0) return res.status(404).json({ message: 'Emisión no encontrada' });
-        res.json({ message: 'Emisión eliminada correctamente' });
+    
+    db.query('CALL eliminar_emision(?, ?)', [req.user.id, id], (err, results) => {
+        if (err) {
+            console.error('Error en la consulta SQL:', err);
+            return res.status(500).json({ 
+                error: err.sqlMessage || 'Error al eliminar la emisión',
+                details: process.env.NODE_ENV === 'development' ? err.message : undefined
+            });
+        }
+        
+        if (results[0][0].filas_afectadas === 0) {
+            return res.status(404).json({ message: 'Emisión no encontrada' });
+        }
+        
+        res.json({ message: 'Emisión marcada como eliminada correctamente' });
     });
 });
 

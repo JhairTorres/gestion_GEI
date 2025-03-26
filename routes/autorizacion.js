@@ -28,7 +28,6 @@ const generateTokens = (user) => {
     return { accessToken, refreshToken };
 };
 
-// 🔐 Login de usuario con cookies seguras
 router.post('/login', (req, res) => {
     const { correo, clave } = req.body;
 
@@ -39,6 +38,14 @@ router.post('/login', (req, res) => {
         const user = results[0];
         const validPass = await bcrypt.compare(clave, user.clave);
         if (!validPass) return res.status(400).json({ message: 'Contraseña incorrecta' });
+
+        // Mapear el rol_id al nombre del rol
+        const roles = {
+            1: 'Administrador',
+            2: 'Usuario',
+            3: 'Auditor'
+        };
+        const rolNombre = roles[user.rol_id] || 'Desconocido';
 
         // Generar tokens
         const { accessToken, refreshToken } = generateTokens(user);
@@ -52,7 +59,7 @@ router.post('/login', (req, res) => {
             httpOnly: true, secure: false, sameSite: 'Lax', maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
         });
 
-        res.json({ message: 'Login exitoso', rol: user.rol });
+        res.json({ message: 'Login exitoso', rol: rolNombre });
     });
 });
 
@@ -101,20 +108,57 @@ router.get('/', verifyToken, (req, res) => {
     });
 });
 
-// Registrar usuario
+// Registrar usuario usando procedimiento almacenado
 router.post('/register', async (req, res) => {
     const { nombre, correo, clave, rol } = req.body;
-    const hashedClave = await bcrypt.hash(clave, 10);
-
-    db.query(
-        'INSERT INTO usuarios (nombre, correo, clave, rol) VALUES (?, ?, ?, ?)',
-        [nombre, correo, hashedClave, rol],
-        (err) => {
-            if (err) return res.status(500).json({ error: err.message });
-            res.json({ message: 'Usuario registrado exitosamente' });
+    
+    try {
+        // 1. Validar campos requeridos
+        if (!nombre || !correo || !clave || !rol) {
+            return res.status(400).json({ error: 'Todos los campos son requeridos' });
         }
-    );
+
+        // 2. Hashear la contraseña antes de enviarla al procedimiento
+        const hashedClave = await bcrypt.hash(clave, 10);
+
+        // 3. Llamar al procedimiento almacenado
+        const [results] = await db.promise().query(
+            'CALL registrar_usuario(?, ?, ?, ?, 1)',
+            [nombre, correo, hashedClave, rol]
+        );
+
+        // El procedimiento devuelve el ID del nuevo usuario en el primer conjunto de resultados
+        const nuevoUsuarioId = results[0][0].nuevo_usuario_id;
+
+        res.status(201).json({ 
+            success: true,
+            message: 'Usuario registrado exitosamente',
+            usuarioId: nuevoUsuarioId
+        });
+
+    } catch (err) {
+        console.error('Error en registro:', err);
+        
+        // Manejar errores específicos del procedimiento almacenado
+        if (err.code === '45000') {
+            return res.status(400).json({ 
+                error: 'Error de validación',
+                message: err.message,
+                roles_permitidos: ['Administrador', 'Usuario', 'Auditor']
+            });
+        }
+        
+        // Error de correo duplicado (asumiendo que el procedimiento usa el mismo código)
+        if (err.code === 'ER_DUP_ENTRY' || err.message.includes('correo electrónico ya está registrado')) {
+            return res.status(400).json({ 
+                error: 'El correo ya está registrado' 
+            });
+        }
+
+        res.status(500).json({ 
+            error: 'Error al registrar el usuario',
+            details: process.env.NODE_ENV === 'development' ? err.message : undefined
+        });
+    }
 });
-
-
 module.exports = router;

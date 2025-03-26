@@ -28,7 +28,14 @@ async function checkToken() {
     return true;
 }
 
-// Obtener todos los registros de ubicaciones
+function validarTexto(texto) {
+    return /^[a-zA-ZÀ-ÿ\s]{2,50}$/.test(texto);
+}
+
+function validarNumero(numero) {
+    return /^[0-9]+$/.test(numero);
+}
+
 async function fetchUbicaciones() {
     if (!(await checkToken())) return;
 
@@ -47,13 +54,12 @@ async function fetchUbicaciones() {
     }
 }
 
-// Buscar una ubicación por ID
 async function searchUbicacion() {
     if (!(await checkToken())) return;
 
-    const id = document.getElementById("searchId").value;
-    if (!id) {
-        alert("Ingrese un ID válido");
+    const id = document.getElementById("searchId").value.trim();
+    if (!validarNumero(id)) {
+        alert("Ingrese un ID válido (número positivo)");
         return;
     }
 
@@ -73,16 +79,15 @@ async function searchUbicacion() {
     }
 }
 
-// Agregar una nueva ubicación
 async function saveUbicacion() {
     if (!(await checkToken())) return;
 
-    const pais = document.getElementById("pais").value;
-    const region = document.getElementById("region").value;
-    const ciudad = document.getElementById("ciudad").value;
+    const pais = document.getElementById("pais").value.trim();
+    const region = document.getElementById("region").value.trim();
+    const ciudad = document.getElementById("ciudad").value.trim();
 
-    if (!pais || !region || !ciudad) {
-        alert("Todos los campos son obligatorios");
+    if (!validarTexto(pais) || !validarTexto(region) || !validarTexto(ciudad)) {
+        alert("Todos los campos deben contener entre 2 y 50 caracteres alfabéticos");
         return;
     }
 
@@ -104,17 +109,16 @@ async function saveUbicacion() {
     }
 }
 
-// Actualizar una ubicación por ID
 async function updateUbicacion() {
     if (!(await checkToken())) return;
 
-    const id = document.getElementById("updateId").value;
-    const pais = document.getElementById("updatePais").value;
-    const region = document.getElementById("updateRegion").value;
-    const ciudad = document.getElementById("updateCiudad").value;
+    const id = document.getElementById("updateId").value.trim();
+    const pais = document.getElementById("updatePais").value.trim();
+    const region = document.getElementById("updateRegion").value.trim();
+    const ciudad = document.getElementById("updateCiudad").value.trim();
 
-    if (!id || !pais || !region || !ciudad) {
-        alert("Todos los campos son obligatorios");
+    if (!validarNumero(id) || !validarTexto(pais) || !validarTexto(region) || !validarTexto(ciudad)) {
+        alert("ID debe ser un número y los demás campos deben contener entre 2 y 50 caracteres alfabéticos");
         return;
     }
 
@@ -135,7 +139,7 @@ async function updateUbicacion() {
         alert("No se pudo actualizar la ubicación");
     }
 }
-// Renderizar tabla de ubicaciones
+
 function renderUbicaciones(ubicaciones) {
     const tabla = document.getElementById("ubicaciones-table");
     tabla.innerHTML = "";
@@ -152,7 +156,6 @@ function renderUbicaciones(ubicaciones) {
     });
 }
 
-// Cerrar sesión
 async function logout() {
     try {
         await fetch('http://localhost:5000/api/auth/logout', {
@@ -165,5 +168,4 @@ async function logout() {
     window.location.href = "../../login/login.html";
 }
 
-// Cargar ubicaciones al iniciar
 fetchUbicaciones();

@@ -5,7 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Sensores</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="sensores.js"></script>
+    <style>
+        .action-buttons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin: 0 5px;
+        }
+        .btn-edit { color: #007bff; }
+        .btn-delete { color: #dc3545; }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .sensor-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .sensor-info h4 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .sensor-info p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,61 +65,86 @@
 
         <h2>Gestión de Sensores</h2>
 
+        <!-- Modal para edición -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3>Editar Sensor</h3>
+                <input type="hidden" id="modalSensorId">
+                <input type="text" id="modalNombreSensor" placeholder="Nombre del Sensor" class="form-input">
+                <input type="number" id="modalIdUbicacion" placeholder="ID Ubicación" class="form-input">
+                <input type="number" id="modalLatitud" placeholder="Latitud" class="form-input">
+                <input type="number" id="modalLongitud" placeholder="Longitud" class="form-input">
+                <button onclick="submitEdit()" class="btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+
+        <!-- Modal para confirmación de eliminación -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3>Confirmar Eliminación</h3>
+                <p id="deleteModalText">¿Estás seguro de que deseas eliminar este sensor?</p>
+                <button onclick="confirmDelete()" class="btn-danger">Eliminar</button>
+                <button onclick="closeModal()" class="btn-secondary">Cancelar</button>
+            </div>
+        </div>
+
         <!-- 🔹 Buscar Sensor por ID -->
         <div class="section">
             <h3>Buscar Sensor</h3>
-            <input type="number" id="searchId" placeholder="ID Sensor">
-            <button onclick="searchSensor()">Buscar</button>
+            <input type="number" id="searchId" placeholder="ID Sensor" class="form-input">
+            <button onclick="searchSensor()" class="btn-primary">Buscar</button>
+            
+            <!-- Display area for searched sensor -->
+            <div id="sensorResult" class="sensor-info" style="display: none;">
+                <h4>Información del Sensor</h4>
+                <p><strong>ID:</strong> <span id="displayId"></span></p>
+                <p><strong>Nombre:</strong> <span id="displayNombre"></span></p>
+                <p><strong>ID Ubicación:</strong> <span id="displayUbicacion"></span></p>
+                <p><strong>Coordenadas:</strong> <span id="displayCoordenadas"></span></p>
+                <p><strong>Creado por:</strong> <span id="displayCreadoPor"></span></p>
+                <p><strong>Fecha creación:</strong> <span id="displayFechaCreacion"></span></p>
+                <p><strong>Última calibración:</strong> <span id="displayUltimaCalibracion"></span></p>
+                <div class="action-buttons">
+                    <button class="btn-edit" onclick="prepareEdit()">✏️</button>
+                    <button class="btn-delete" onclick="prepareDelete()">🗑️</button>
+                </div>
+            </div>
         </div>
 
         <!-- 🔹 Agregar Nuevo Sensor -->
         <div class="section">
             <h3>Agregar Nuevo Sensor</h3>
-            <input type="text" id="nombre_sensor" placeholder="Nombre del Sensor">
-            <input type="number" id="id_ubicacion" placeholder="ID Ubicación">
-            <input type="number" id="latitud" placeholder="Latitud">
-            <input type="number" id="longitud" placeholder="Longitud">
-            <button onclick="saveSensor()">Agregar</button>
-        </div>
-
-        <!-- 🔹 Actualizar Sensor -->
-        <div class="section">
-            <h3>Actualizar Sensor</h3>
-            <input type="number" id="updateId" placeholder="ID Sensor">
-            <input type="text" id="newNombreSensor" placeholder="Nuevo Nombre">
-            <input type="number" id="newIdUbicacion" placeholder="Nuevo ID Ubicación">
-            <input type="number" id="newLatitud" placeholder="Nueva Latitud">
-            <input type="number" id="newLongitud" placeholder="Nueva Longitud">
-            <button onclick="editSensor()">Actualizar</button>
-        </div>
-
-        <!-- 🔹 Eliminar Sensor -->
-        <div class="section">
-            <h3>Eliminar Sensor</h3>
-            <input type="number" id="deleteId" placeholder="ID Sensor">
-            <button onclick="deleteSensor()">Eliminar</button>
+            <input type="text" id="nombre_sensor" placeholder="Nombre del Sensor" class="form-input">
+            <input type="number" id="id_ubicacion" placeholder="ID Ubicación" class="form-input">
+            <input type="number" id="latitud" placeholder="Latitud" step="any" class="form-input">
+            <input type="number" id="longitud" placeholder="Longitud" step="any" class="form-input">
+            <button onclick="saveSensor()" class="btn-primary">Agregar</button>
         </div>
 
         <!-- 🔹 Tabla de Sensores -->
         <h3>Registros de Sensores</h3>
-        <table>
+        <table class="data-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>ID Ubicación</th>
-                    <th>Geolocalización</th>
+                    <th>Coordenadas</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="sensores-table"></tbody>
         </table>
+
+        <!-- 🔹 Mapa de Sensores -->
         <h3>Mapa de Sensores</h3>
-        <div style="width: 100%; height: 500px; border: 1px solid #ccc; margin-bottom: 20px;">
-        <iframe src="/mapas/mapa_sensores.html" width="100%" height="100%" frameborder="0"></iframe>
+        <div class="map-container">
+            <iframe src="/mapas/mapa_sensores.html" width="100%" height="500px" frameborder="0"></iframe>
         </div>
-        </div>
+    </div>
 
-    <!-- 🔹 Mapa de Sensores -->
-
+    <script src="sensores.js"></script>
 </body>
 </html>

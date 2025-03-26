@@ -168,24 +168,130 @@ async function deleteEmision() {
     }
 }
 
-// Renderizar tabla de emisiones
+// Renderizar tabla de emisiones con mejoras
 function renderEmisiones(emisiones) {
     const tabla = document.getElementById("emisiones-table");
     tabla.innerHTML = "";
 
+    // Crear encabezados de tabla
+    const headerRow = document.createElement("tr");
+    headerRow.innerHTML = `
+        <th>ID</th>
+        <th>Fuente</th>
+        <th>Gas</th>
+        <th>Ubicación</th>
+        <th>Cantidad (ton)</th>
+        <th>Periodo</th>
+        <th>Acciones</th>
+    `;
+    tabla.appendChild(headerRow);
+
+    // Llenar tabla con datos
     emisiones.forEach(emision => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${emision.id}</td>
-            <td>${emision.fuente_id}</td>
-            <td>${emision.gas_id}</td>
-            <td>${emision.ubicacion_id}</td>
-            <td>${emision.cantidad_emision}</td>
-            <td>${emision.periodo}</td>
+            <td>${emision.fuente_nombre || emision.fuente_id}</td>
+            <td>${emision.gas_nombre || emision.gas_id}</td>
+            <td>${emision.ciudad || emision.ubicacion_id}</td>
+            <td>${emision.cantidad_emision.toFixed(2)}</td>
+            <td>${new Date(emision.periodo).toLocaleDateString()}</td>
+            <td class="actions">
+                <button onclick="loadForEdit(${emision.id})">✏️</button>
+                <button onclick="confirmDelete(${emision.id})">🗑️</button>
+            </td>
         `;
         tabla.appendChild(row);
     });
+
+    // Actualizar iframes de gráficas
+    updateCharts();
 }
+// Renderizar tabla de emisiones con mejoras
+function renderEmisiones(emisiones) {
+    const tabla = document.getElementById("emisiones-table");
+    tabla.innerHTML = "";
+
+    // Crear encabezados de tabla
+    const headerRow = document.createElement("tr");
+    headerRow.innerHTML = `
+        <th>ID</th>
+        <th>Fuente</th>
+        <th>Gas</th>
+        <th>Ubicación</th>
+        <th>Cantidad (ton)</th>
+        <th>Periodo</th>
+        <th>Acciones</th>
+    `;
+    tabla.appendChild(headerRow);
+
+    // Llenar tabla con datos
+    emisiones.forEach(emision => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${emision.id}</td>
+            <td>${emision.fuente_nombre || emision.fuente_id}</td>
+            <td>${emision.gas_nombre || emision.gas_id}</td>
+            <td>${emision.ciudad || emision.ubicacion_id}</td>
+            <td>${emision.cantidad_emision.toFixed(2)}</td>
+            <td>${new Date(emision.periodo).toLocaleDateString()}</td>
+            <td class="actions">
+                <button onclick="loadForEdit(${emision.id})">✏️</button>
+                <button onclick="confirmDelete(${emision.id})">🗑️</button>
+            </td>
+        `;
+        tabla.appendChild(row);
+    });
+
+    // Actualizar iframes de gráficas
+    updateCharts();
+}
+
+// Función para actualizar las gráficas
+function updateCharts() {
+    const currentDate = new Date().toISOString().split('T')[0];
+    
+    // Actualizar iframes con parámetro de cache
+    document.getElementById('chart-gas').src = `/graficas/emisiones_por_gas.html?t=${currentDate}`;
+    document.getElementById('chart-sector').src = `/graficas/emisiones_por_sector.html?t=${currentDate}`;
+    document.getElementById('chart-map').src = `/graficas/mapa_emisiones.html?t=${currentDate}`;
+    document.getElementById('chart-evolution').src = `/graficas/evolucion_emisiones.html?t=${currentDate}`;
+}
+
+async function loadForEdit(id) {
+    try {
+        const response = await fetch(`http://localhost:5000/api/emisiones/${id}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Error al cargar emisión');
+
+        const emision = await response.json();
+        
+        // Rellenar formulario de edición
+        document.getElementById("updateId").value = emision.id;
+        document.getElementById("updateFuenteId").value = emision.fuente_id;
+        document.getElementById("updateGasId").value = emision.gas_id;
+        document.getElementById("updateUbicacionId").value = emision.ubicacion_id;
+        document.getElementById("updateCantidadEmision").value = emision.cantidad_emision;
+        document.getElementById("updatePeriodo").value = emision.periodo.split('T')[0];
+        
+        // Scroll al formulario de edición
+        document.getElementById("update-section").scrollIntoView();
+    } catch (error) {
+        console.error("Error al cargar emisión:", error);
+        alert("No se pudo cargar la emisión para edición");
+    }
+}
+
+// Función para confirmar eliminación
+function confirmDelete(id) {
+    if (confirm(`¿Estás seguro de eliminar la emisión con ID ${id}?`)) {
+        deleteEmision(id);
+    }
+}
+
 
 // Cerrar sesión
 async function logout() {
@@ -200,5 +306,13 @@ async function logout() {
     window.location.href = "../../login/login.html";
 }
 
-// Cargar emisiones al iniciar
-fetchEmisiones();
+
+// Cargar emisiones y configurar eventos al iniciar
+document.addEventListener('DOMContentLoaded', () => {
+    fetchEmisiones();
+    
+    // Configurar fecha actual por defecto en formularios
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("periodo").value = today;
+    document.getElementById("updatePeriodo").value = today;
+});
